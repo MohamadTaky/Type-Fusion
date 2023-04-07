@@ -1,3 +1,5 @@
+import AnimatedPage from "~/components/animatedPage.component";
+
 export default function StatsPage() {
-	return <section>Stats page</section>;
+	return <AnimatedPage>Stats page</AnimatedPage>;
 }

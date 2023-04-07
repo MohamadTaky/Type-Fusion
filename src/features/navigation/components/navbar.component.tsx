@@ -17,9 +17,9 @@ export default function Navbar() {
 				</div>
 				<div className="text-xl">Guest</div>
 			</figure>
-			<nav className="flex flex-col m-4 gap-4 text-center text-lg">
-				<NavItem label="practice" Icon={Keyboard} />
-				<NavItem label="stats" Icon={ChartBar} />
+			<nav className="flex flex-col justify-center m-4 gap-4 text-center text-lg">
+				<NavItem to="/" label="practice" Icon={Keyboard} />
+				<NavItem to="/stats" label="stats" Icon={ChartBar} />
 			</nav>
 		</aside>
 	);

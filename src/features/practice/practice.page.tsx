@@ -1,3 +1,5 @@
+import AnimatedPage from "~/components/animatedPage.component";
+
 export default function PracticePage() {
-	return <section>Practice page</section>;
+	return <AnimatedPage>Practice page</AnimatedPage>;
 }

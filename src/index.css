@@ -2,3 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.dark-mode {
+	--color-fill-1: 36, 36, 76;
+	--color-fill-2: 30, 30, 62;
+	--color-fill-3: 22, 22, 46;
+	--color-fill-4: 15, 15, 31;
+	--color-accent-1: 95, 83, 227;
+	--color-accent-2: 87, 74, 226;
+	--color-success-1: 30, 245, 173;
+	--color-text-1: 255, 255, 255;
+}
+
+.light-mode {
+	--color-text-1: 51, 51, 51;
+	--color-fill-1: 242, 242, 242;
+	--color-fill-2: 242, 242, 242;
+	--color-fill-3: 229, 229, 229;
+}

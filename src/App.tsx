@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import Navbar from "./features/navigation/components/navbar.component";
 import StatsPage from "./features/stats/stats.page";
 import PracticePage from "./features/practice/practice.page";
-import { CircleNotch, ArrowClockwise } from "@phosphor-icons/react";
+import { CircleNotch, ArrowClockwise, Warning } from "@phosphor-icons/react";
 import SuspenseAfterInitialRender from "./components/suspenseAfterInitialRender";
 
 function App() {
@@ -20,10 +20,13 @@ function App() {
 						<ErrorBoundary
 							onReset={reset}
 							fallbackRender={({ resetErrorBoundary, error }) => (
-								<div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
-									<p className="text-failure-1 text-lg">{error.message}</p>
-									<button className="bg-accent-2 px-3 py-1 rounded transition-colors hover:bg-accent-1" onClick={resetErrorBoundary}>
-										<ArrowClockwise size="25" weight="fill"/>
+								<div className="absolute inset-0 flex flex-col items-center justify-center">
+									<Warning size="96" weight="fill" className="text-failure-1"/>
+									<p className="text-failure-1 text-lg mb-2">{error.message}</p>
+									<button
+										className="bg-accent-2 px-3 py-1 rounded transition-colors hover:bg-accent-1"
+										onClick={resetErrorBoundary}>
+										<ArrowClockwise size="25" weight="fill" />
 									</button>
 								</div>
 							)}>

@@ -5,7 +5,7 @@ import Keyboard from "./components/keyboard.component";
 
 export default function PracticePage() {
 	return (
-		<AnimatedPage>
+		<AnimatedPage className="w-9/12 h-full mx-auto flex flex-col gap-4">
 			<Quote />
 			<Stats />
 			<Keyboard />

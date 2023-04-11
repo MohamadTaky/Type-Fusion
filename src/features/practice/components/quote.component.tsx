@@ -61,7 +61,7 @@ export default function Quote() {
 	};
 
 	return (
-		<section className="bg-fill-3 p-8 rounded-md mx-auto font-mono text-lg">
+		<section className="bg-fill-3 p-8 rounded-md font-mono text-lg my-auto">
 			<input
 				type="text"
 				className="w-0 h-0 absolute"

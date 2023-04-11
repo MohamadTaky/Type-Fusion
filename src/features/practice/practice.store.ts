@@ -12,6 +12,10 @@ interface PracticeStore {
 	errorCount: number;
 	incrementErrorCount: () => void;
 	resetErrorCount: () => void;
+	speed: number;
+	setSpeed: (value: number) => void;
+	accuracy: number;
+	setAccuracy: (value: number) => void;
 }
 
 const usePracticeStore = create<PracticeStore>()(set => ({
@@ -36,6 +40,10 @@ const usePracticeStore = create<PracticeStore>()(set => ({
 	errorCount: 0,
 	incrementErrorCount: () => set(state => ({ ...state, errorCount: state.errorCount + 1 })),
 	resetErrorCount: () => set(state => ({ ...state, errorCount: 0 })),
+	speed: 0,
+	setSpeed: value => set(state => ({ ...state, speed: value })),
+	accuracy: 0,
+	setAccuracy: value => set(state => ({ ...state, accuracy: value })),
 }));
 
 export function usePressedKeys() {
@@ -70,5 +78,17 @@ export function useIncrementErrorCount() {
 }
 export function useResetErrorCount() {
 	return usePracticeStore(state => state.resetErrorCount);
+}
+export function useSpeed() {
+	return usePracticeStore(state => state.speed);
+}
+export function useSetSpeed() {
+	return usePracticeStore(state => state.setSpeed);
+}
+export function useAccuracy() {
+	return usePracticeStore(state => state.accuracy);
+}
+export function useSetAccuracy() {
+	return usePracticeStore(state => state.setAccuracy);
 }
 export default usePracticeStore;

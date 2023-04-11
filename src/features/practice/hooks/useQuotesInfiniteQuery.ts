@@ -22,11 +22,19 @@ export default function useQuotesInfiniteQuery() {
 		select,
 		getNextPageParam: getRandomPage,
 		refetchOnWindowFocus: false,
+		refetchOnMount: false,
+		refetchOnReconnect: false,
+		suspense: true,
+		useErrorBoundary: true,
+		onError: error => {
+			console.log(error);
+		},
 	});
 	return { ...infiniteQuotesQuery };
 }
 
 function fetchInfiniteQuotes({ pageParam = getRandomPage() }) {
+	throw new Error("An error occured");
 	return axios.get(`https://api.quotable.io/quotes?limit=5&maxLength=90&page=${pageParam}`);
 }
 

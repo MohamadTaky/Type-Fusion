@@ -3,14 +3,15 @@ export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		colors: {
-			"fill-1": withOpacity("--color-fill-1"),
-			"fill-2": withOpacity("--color-fill-2"),
-			"fill-3": withOpacity("--color-fill-3"),
-			"fill-4": withOpacity("--color-fill-4"),
-			"accent-1": withOpacity("--color-accent-1"),
-			"accent-2": withOpacity("--color-accent-2"),
+			"fill-1": "rgb(var(--color-fill-1) / <alpha-value>)",
+			"fill-2": "rgb(var(--color-fill-2) / <alpha-value>)",
+			"fill-3": "rgb(var(--color-fill-3) / <alpha-value>)",
+			"fill-4": "rgb(var(--color-fill-4) / <alpha-value>)",
+			"accent-1": "rgb(var(--color-accent-1) / <alpha-value>)",
+			"accent-2": "rgb(var(--color-accent-2) / <alpha-value>)",
+			"failure-1": "rgb(var(--color-failure-1) / <alpha-value>)",
+			success: "rgb(var(--color-success-1) / <alpha-value>)",
 			transparent: "#00000000",
-			success: withOpacity("--color-success-1"),
 		},
 		gradientColorStops: {
 			"fill-1": "rgb(var(--color-fill-1))",
@@ -24,16 +25,12 @@ export default {
 		},
 		extend: {
 			textColor: {
-				1: withOpacity("--color-text-1"),
+				1: "rgb(var(--color-text-1) / <alpha-value>)",
+			},
+			fontFamily: {
+				mono: ["Cousine", "Courier New"],
 			},
 		},
 	},
 	plugins: [],
 };
-
-function withOpacity(variable) {
-	return ({ opacityValue }) => {
-		if (opacityValue !== undefined) return `rgba(var(${variable}), ${opacityValue})`;
-		return `rgb(${variable})`;
-	};
-}

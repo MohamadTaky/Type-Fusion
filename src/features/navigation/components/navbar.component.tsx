@@ -1,4 +1,4 @@
-import { User, ChartBar, Keyboard } from "@phosphor-icons/react";
+import { User, ChartBar, Keyboard, UsersThree } from "@phosphor-icons/react";
 import coverImage from "/assets/cover-image.webp";
 import NavItem from "./navItem.component";
 
@@ -20,6 +20,7 @@ export default function Navbar() {
 			<nav className="flex flex-col justify-center m-4 gap-4 text-center text-lg">
 				<NavItem to="/" label="practice" Icon={Keyboard} />
 				<NavItem to="/stats" label="stats" Icon={ChartBar} />
+				<NavItem to="/profile" label="friends" Icon={UsersThree} />
 			</nav>
 		</aside>
 	);

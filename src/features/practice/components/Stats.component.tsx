@@ -10,8 +10,13 @@ export default function Stats() {
 			<div>
 				Errors : <span className="text-failure-1">{errorCount}</span>
 			</div>
-			<div>Speed: {speed || "N/A"}</div>
-			<div>Accuracy: {accuracy || "N/A"}</div>
+			<div>
+				Speed: {speed || "N/A"} <span className="text-xs">wpm</span>
+			</div>
+			<div>
+				Accuracy: {accuracy || "N/A"}
+				<span className="text-xs">%</span>
+			</div>
 			<div>Score: {score || "N/A"}</div>
 		</div>
 	);

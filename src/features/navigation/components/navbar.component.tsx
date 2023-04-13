@@ -20,7 +20,6 @@ export default function Navbar() {
 			<nav className="flex flex-col justify-center m-4 gap-4 text-center text-lg">
 				<NavItem to="/" label="practice" Icon={Keyboard} />
 				<NavItem to="/stats" label="stats" Icon={ChartBar} />
-				<NavItem to="/profile" label="friends" Icon={UsersThree} />
 			</nav>
 		</aside>
 	);

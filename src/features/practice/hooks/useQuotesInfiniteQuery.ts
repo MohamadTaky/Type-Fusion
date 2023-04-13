@@ -26,15 +26,12 @@ export default function useQuotesInfiniteQuery() {
 		refetchOnReconnect: false,
 		suspense: true,
 		useErrorBoundary: true,
-		onError: error => {
-			console.log(error);
-		},
 	});
 	return { ...infiniteQuotesQuery };
 }
 
 function fetchInfiniteQuotes({ pageParam = getRandomPage() }) {
-	throw new Error("An error occured");
+	console.log("daa");
 	return axios.get(`https://api.quotable.io/quotes?limit=5&maxLength=90&page=${pageParam}`);
 }
 

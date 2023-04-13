@@ -1,9 +1,11 @@
 import { create } from "zustand";
 
 interface PracticeStore {
-	pressedKeys: Set<string>;
-	addKey: (key: string) => void;
-	removeKey: (key: string) => void;
+	keys: Record<string, boolean>;
+	addKey: (code: string) => void;
+	pressKey: (code: string) => void;
+	releaseKey: (code: string) => void;
+
 	currentLetterIndex: number;
 	incrementCurrentLetterIndex: () => void;
 	resetCurrentLetterIndex: () => void;
@@ -15,17 +17,6 @@ interface PracticeStore {
 }
 
 const usePracticeStore = create<PracticeStore>()(set => ({
-	pressedKeys: new Set(),
-	addKey: key => set(state => ({ ...state, pressedKeys: new Set(state.pressedKeys).add(key) })),
-	removeKey: key =>
-		set(state => {
-			const newPressedKeys = state.pressedKeys;
-			newPressedKeys.delete(key);
-			return {
-				...state,
-				pressedKeys: newPressedKeys,
-			};
-		}),
 	currentLetterIndex: 0,
 	incrementCurrentLetterIndex: () =>
 		set(state => ({ ...state, currentLetterIndex: state.currentLetterIndex + 1 })),
@@ -36,17 +27,33 @@ const usePracticeStore = create<PracticeStore>()(set => ({
 	errorCount: 0,
 	incrementErrorCount: () => set(state => ({ ...state, errorCount: state.errorCount + 1 })),
 	resetErrorCount: () => set(state => ({ ...state, errorCount: 0 })),
+	keys: {},
+	addKey: code =>
+		set(state => ({
+			...state,
+			keys: {
+				...state.keys,
+				[code]: false,
+			},
+		})),
+	pressKey: code =>
+		set(state => ({
+			...state,
+			keys: {
+				...state.keys,
+				[code]: true,
+			},
+		})),
+	releaseKey: code =>
+		set(state => ({
+			...state,
+			keys: {
+				...state.keys,
+				[code]: false,
+			},
+		})),
 }));
 
-export function usePressedKeys() {
-	return usePracticeStore(state => state.pressedKeys);
-}
-export function useAddKey() {
-	return usePracticeStore(state => state.addKey);
-}
-export function useRemoveKey() {
-	return usePracticeStore(state => state.removeKey);
-}
 export function useCurrentLetterIndex() {
 	return usePracticeStore(state => state.currentLetterIndex);
 }
@@ -70,5 +77,17 @@ export function useIncrementErrorCount() {
 }
 export function useResetErrorCount() {
 	return usePracticeStore(state => state.resetErrorCount);
+}
+export function useAddKey() {
+	return usePracticeStore(state => state.addKey);
+}
+export function useKey(code: string) {
+	return usePracticeStore(state => state.keys[code]);
+}
+export function usePressKey() {
+	return usePracticeStore(state => state.pressKey);
+}
+export function useReleaseKey() {
+	return usePracticeStore(state => state.releaseKey);
 }
 export default usePracticeStore;

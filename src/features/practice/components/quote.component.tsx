@@ -1,8 +1,6 @@
 import { KeyboardEventHandler, useEffect, useRef } from "react";
 import useQuotesInfiniteQuery from "../hooks/useQuotesInfiniteQuery";
 import {
-	useAddKey,
-	useRemoveKey,
 	useCurrentLetterIndex,
 	useIncrementCurrentLetterIndex,
 	useResetCurrentLetterIndex,
@@ -11,6 +9,8 @@ import {
 	useIncrementErrorCount,
 	useResetErrorCount,
 	useErrorCount,
+	usePressKey,
+	useReleaseKey,
 } from "../practice.store";
 
 import { useAddStats } from "~/features/stats/hooks/useStatsPersistedStore";
@@ -27,8 +27,10 @@ export default function Quote() {
 	const incrementErrorCount = useIncrementErrorCount();
 	const errorCount = useErrorCount();
 	const resetErrorCount = useResetErrorCount();
-	const addKey = useAddKey();
-	const removeKey = useRemoveKey();
+
+	const pressKey = usePressKey();
+	const releaseKey = useReleaseKey();
+
 	const addStats = useAddStats();
 
 	useEffect(() => {
@@ -56,12 +58,12 @@ export default function Quote() {
 
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = event => {
 		if (event.code === "Tab") event.preventDefault();
-		addKey(event.code);
+		pressKey(event.code);
 	};
 
 	const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = event => {
 		if (event.code === "Tab") event.preventDefault();
-		removeKey(event.code);
+		releaseKey(event.code);
 		if (event.key.length > 1) return;
 		else if (currentQuote?.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
 		else incrementErrorCount();

@@ -1,4 +1,4 @@
-import { KeyboardEventHandler, useEffect } from "react";
+import { KeyboardEventHandler, useEffect, useRef } from "react";
 import useQuotesInfiniteQuery from "../hooks/useQuotesInfiniteQuery";
 import {
 	useAddKey,
@@ -10,25 +10,26 @@ import {
 	useIncrementCurrentQuoteIndex,
 	useIncrementErrorCount,
 	useResetErrorCount,
+	useErrorCount,
 } from "../practice.store";
+
+import { useAddStats } from "~/features/stats/hooks/useStatsPersistedStore";
 
 export default function Quote() {
 	const { data, fetchNextPage } = useQuotesInfiniteQuery();
-
+	const previousTime = useRef(Date.now());
 	const currentLetterIndex = useCurrentLetterIndex();
 	const incrementCurrentLetterIndex = useIncrementCurrentLetterIndex();
 	const resetCurrentLetterIndex = useResetCurrentLetterIndex();
-
 	const currentQuoteIndex = useCurrentQuoteIndex();
-	const incrementCurrentQuoteIndex = useIncrementCurrentQuoteIndex();
-
-	const incrementErrorCount = useIncrementErrorCount();
-	const resetErrorCount = useResetErrorCount();
-
 	const currentQuote = data?.pages[currentQuoteIndex].content;
-
+	const incrementCurrentQuoteIndex = useIncrementCurrentQuoteIndex();
+	const incrementErrorCount = useIncrementErrorCount();
+	const errorCount = useErrorCount();
+	const resetErrorCount = useResetErrorCount();
 	const addKey = useAddKey();
 	const removeKey = useRemoveKey();
+	const addStats = useAddStats();
 
 	useEffect(() => {
 		resetErrorCount();
@@ -40,11 +41,17 @@ export default function Quote() {
 	}, [currentQuoteIndex]);
 
 	useEffect(() => {
-		if (currentLetterIndex === currentQuote?.length) {
-			incrementCurrentQuoteIndex();
-			resetErrorCount();
-			resetCurrentLetterIndex();
-		}
+		if (currentLetterIndex !== currentQuote?.length) return;
+		const stats = calculateStats(
+			currentQuote.length,
+			(Date.now() - previousTime.current) / 1000 / 60,
+			errorCount
+		);
+		addStats(stats);
+		previousTime.current = Date.now();
+		incrementCurrentQuoteIndex();
+		resetErrorCount();
+		resetCurrentLetterIndex();
 	}, [currentLetterIndex]);
 
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = event => {
@@ -56,7 +63,7 @@ export default function Quote() {
 		if (event.code === "Tab") event.preventDefault();
 		removeKey(event.code);
 		if (event.key.length > 1) return;
-		if (currentQuote?.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
+		else if (currentQuote?.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
 		else incrementErrorCount();
 	};
 
@@ -70,7 +77,7 @@ export default function Quote() {
 				autoFocus
 				onBlur={event => event.target.focus()}
 			/>
-			<p className="tracking-wide w-[60ch] mx-auto text-center whitespace-break-spaces">
+			<p className="tracking-wide max-w-[60ch] text-center mx-auto whitespace-pre-wrap">
 				<span className="text-success">{currentQuote?.slice(0, currentLetterIndex)}</span>
 				<span className="border-b-2">{currentQuote?.at(currentLetterIndex)}</span>
 				<span>{currentQuote?.slice(currentLetterIndex + 1)}</span>
@@ -78,4 +85,15 @@ export default function Quote() {
 			<p className="text-right mt-20">{data?.pages[currentQuoteIndex].author}</p>
 		</section>
 	);
+}
+
+function calculateStats(letters: number, time: number, errors: number) {
+	const speed = Math.round((letters - errors) / time);
+	const accuracy = Math.round(((letters - errors) / letters) * 100);
+	const score = speed * accuracy;
+	return {
+		speed,
+		accuracy,
+		score,
+	};
 }

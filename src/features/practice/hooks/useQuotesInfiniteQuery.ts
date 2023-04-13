@@ -31,7 +31,6 @@ export default function useQuotesInfiniteQuery() {
 }
 
 function fetchInfiniteQuotes({ pageParam = getRandomPage() }) {
-	console.log("daa");
 	return axios.get(`https://api.quotable.io/quotes?limit=5&maxLength=90&page=${pageParam}`);
 }
 

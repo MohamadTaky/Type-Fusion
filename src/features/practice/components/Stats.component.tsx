@@ -1,9 +1,10 @@
-import { useErrorCount, useSpeed, useAccuracy } from "../practice.store";
+import { useErrorCount } from "../practice.store";
+import { useLatestStats } from "~/features/stats/hooks/useStatsPersistedStore";
 
 export default function Stats() {
+	const { speed, accuracy, score } = useLatestStats();
 	const errorCount = useErrorCount();
-	const speed = useSpeed();
-	const accuracy = useAccuracy();
+
 	return (
 		<div className="bg-fill-3 p-2 rounded-md flex justify-around text-sm">
 			<div>
@@ -11,6 +12,7 @@ export default function Stats() {
 			</div>
 			<div>Speed: {speed || "N/A"}</div>
 			<div>Accuracy: {accuracy || "N/A"}</div>
+			<div>Score: {score || "N/A"}</div>
 		</div>
 	);
 }

@@ -2,32 +2,34 @@ import { Suspense } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./features/navigation/components/navbar.component";
+import TopBar from "./features/navigation/components/topbar.component";
 import StatsPage from "./features/stats/stats.page";
 import PracticePage from "./features/practice/practice.page";
 import ErrorPage from "./components/errorPage.component";
 import SuspenseAfterInitialRender from "./components/suspenseAfterInitialRender";
 import SuspenseFallback from "./components/fallbacks/suspenseFallback.component";
 import QueryErrorBoundary from "./components/fallbacks/queryErrorBoundary.component";
+import { useDarkMode } from "./features/navigation/usePreferencesPersistedStore";
 
 function App() {
+	const darkMode = useDarkMode();
 	const location = useLocation();
 	return (
-		<div className="dark-mode">
-			<div className="text-1 h-screen flex bg-fill-4">
+		<div className={darkMode ? "dark-mode" : "light-mode"}>
+			<div className="h-screen text-1 bg-fill-4 grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] overflow-hidden">
 				<QueryErrorBoundary>
 					<Suspense fallback={<SuspenseFallback />}>
 						<Navbar />
-						<main className="p-4 flex-1 overflow-hidden relative">
-							<SuspenseAfterInitialRender fallback={<SuspenseFallback />}>
-								<AnimatePresence mode="wait">
-									<Routes location={location} key={location.pathname}>
-										<Route path="/" index element={<PracticePage />} />
-										<Route path="/stats" element={<StatsPage />} />
-										<Route path="*" element={<ErrorPage />} />
-									</Routes>
-								</AnimatePresence>
-							</SuspenseAfterInitialRender>
-						</main>
+						<TopBar />
+						<SuspenseAfterInitialRender fallback={<SuspenseFallback />}>
+							<AnimatePresence mode="wait">
+								<Routes location={location} key={location.pathname}>
+									<Route path="/" index element={<PracticePage />} />
+									<Route path="/stats" element={<StatsPage />} />
+									<Route path="*" element={<ErrorPage />} />
+								</Routes>
+							</AnimatePresence>
+						</SuspenseAfterInitialRender>
 					</Suspense>
 				</QueryErrorBoundary>
 			</div>

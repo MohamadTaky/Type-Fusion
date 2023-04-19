@@ -10,7 +10,7 @@ export default {
 			"accent-1": "rgb(var(--color-accent-1) / <alpha-value>)",
 			"accent-2": "rgb(var(--color-accent-2) / <alpha-value>)",
 			"failure-1": "rgb(var(--color-failure-1) / <alpha-value>)",
-			success: "rgb(var(--color-success-1) / <alpha-value>)",
+			"success-1": "rgb(var(--color-success-1) / <alpha-value>)",
 			transparent: "#00000000",
 		},
 		gradientColorStops: {
@@ -21,11 +21,12 @@ export default {
 			"accent-1": "rgb(var(--color-accent-1))",
 			"accent-2": "rgb(var(--color-accent-2))",
 			transparent: "#00000000",
-			success: "rgb(var(--color-success-1))",
+			"success-1": "rgb(var(--color-success-1))",
 		},
 		extend: {
 			textColor: {
 				1: "rgb(var(--color-text-1) / <alpha-value>)",
+				2: "rgb(var(--color-text-2) / <alpha-value>)",
 			},
 			fontFamily: {
 				mono: ["Cousine", "Courier New"],

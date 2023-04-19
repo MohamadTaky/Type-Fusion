@@ -8,12 +8,11 @@ export default function NavItem({ Icon, label, ...props }: IProps) {
 		<NavLink
 			{...props}
 			className={({ isActive }) =>
-				`flex items-center justify-between py-1.5 px-3 rounded-lg transition-colors duration-200 ${
-					isActive ? "text-accent-2 bg-fill-1" : "text-1 bg-fill-2 hover:bg-fill-1"
-				}`
+				`flex items-center gap-4 p-2 pr-7 my-2
+				transition-colors duration-200 ${isActive ? "text-accent-2 bg-fill-1" : "text-1 hover:bg-fill-2"}`
 			}>
-			{t(label)}
 			<Icon weight="fill" size="25" />
+			<span>{t(label)}</span>
 		</NavLink>
 	);
 }

@@ -5,7 +5,6 @@ interface PracticeStore {
 	addKey: (code: string) => void;
 	pressKey: (code: string) => void;
 	releaseKey: (code: string) => void;
-
 	currentLetterIndex: number;
 	incrementCurrentLetterIndex: () => void;
 	resetCurrentLetterIndex: () => void;

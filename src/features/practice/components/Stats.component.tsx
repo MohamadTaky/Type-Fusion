@@ -1,4 +1,4 @@
-import { useErrorCount } from "../practice.store";
+import { useErrorCount } from "../usePractice.store";
 import { useLatestStats } from "~/features/stats/hooks/useStatsPersistedStore";
 
 export default function Stats() {

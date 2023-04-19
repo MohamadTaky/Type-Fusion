@@ -11,7 +11,7 @@ import {
 	useErrorCount,
 	usePressKey,
 	useReleaseKey,
-} from "../practice.store";
+} from "../usePractice.store";
 
 import { useAddStats } from "~/features/stats/hooks/useStatsPersistedStore";
 
@@ -22,15 +22,13 @@ export default function Quote() {
 	const incrementCurrentLetterIndex = useIncrementCurrentLetterIndex();
 	const resetCurrentLetterIndex = useResetCurrentLetterIndex();
 	const currentQuoteIndex = useCurrentQuoteIndex();
-	const currentQuote = data?.pages[currentQuoteIndex].content;
+	const currentQuote = data?.pages[currentQuoteIndex].content as string;
 	const incrementCurrentQuoteIndex = useIncrementCurrentQuoteIndex();
 	const incrementErrorCount = useIncrementErrorCount();
 	const errorCount = useErrorCount();
 	const resetErrorCount = useResetErrorCount();
-
 	const pressKey = usePressKey();
 	const releaseKey = useReleaseKey();
-
 	const addStats = useAddStats();
 
 	useEffect(() => {
@@ -43,13 +41,12 @@ export default function Quote() {
 	}, [currentQuoteIndex]);
 
 	useEffect(() => {
-		if (currentLetterIndex !== currentQuote?.length) return;
-		const stats = calculateStats(
-			currentQuote.length,
-			(Date.now() - previousTime.current) / 1000 / 60,
-			errorCount
-		);
-		addStats(stats);
+		if (currentLetterIndex !== currentQuote.length) return;
+		const duration = Date.now() - previousTime.current;
+		const speed = Math.round((currentQuote.length - errorCount) / 5 / (duration / 1000 / 60));
+		const accuracy = Math.round(((currentQuote.length - errorCount) / currentQuote.length) * 100);
+		const score = speed * accuracy;
+		addStats({ speed, accuracy, score, duration, test: currentQuote, errors: errorCount });
 		previousTime.current = Date.now();
 		incrementCurrentQuoteIndex();
 		resetErrorCount();
@@ -80,22 +77,11 @@ export default function Quote() {
 				onBlur={event => event.target.focus()}
 			/>
 			<p className="tracking-wide max-w-[60ch] text-center mx-auto whitespace-pre-wrap">
-				<span className="text-success">{currentQuote?.slice(0, currentLetterIndex)}</span>
+				<span className="text-success-1">{currentQuote?.slice(0, currentLetterIndex)}</span>
 				<span className="border-b-2">{currentQuote?.at(currentLetterIndex)}</span>
 				<span>{currentQuote?.slice(currentLetterIndex + 1)}</span>
 			</p>
 			<p className="text-right mt-20">{data?.pages[currentQuoteIndex].author}</p>
 		</section>
 	);
-}
-
-function calculateStats(letters: number, time: number, errors: number) {
-	const speed = Math.round((letters - errors) / time);
-	const accuracy = Math.round(((letters - errors) / letters) * 100);
-	const score = speed * accuracy;
-	return {
-		speed,
-		accuracy,
-		score,
-	};
 }

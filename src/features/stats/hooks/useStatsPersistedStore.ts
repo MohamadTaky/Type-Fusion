@@ -1,48 +1,97 @@
-import { Record } from "@phosphor-icons/react";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { format } from "date-fns-tz";
 
 type Stats = {
+	tests: string[];
 	speed: number[];
 	accuracy: number[];
 	score: number[];
+	errors: number[];
 };
-type Days = Record<number, Stats>;
-type Months = Record<number, Days>;
-interface IStatsPersistedStore extends Record<number, Months> {
-	latestSpeed: number | null;
-	latestAccuracy: number | null;
-	latestScore: number | null;
-	getStats: (year: number) => Months;
-	addStats: (stats: { speed: number; accuracy: number; score: number }) => void;
+
+interface IStatsPersistedStore {
+	completedTests: number;
+	practiceDuration: number;
+
+	latestSpeed: number;
+	totalSpeed: number;
+	bestSpeed: number;
+	averageSpeed: number;
+
+	latestAccuracy: number;
+	totalAccuracy: number;
+	averageAccuracy: number;
+
+	latestScore: number;
+	totalScore: number;
+	bestScore: number;
+	averageScore: number;
+
+	stats: Record<string, Stats>;
+
+	addStats: (stats: {
+		speed: number;
+		accuracy: number;
+		score: number;
+		duration: number;
+		test: string;
+		errors: number;
+	}) => void;
 }
 
 const useStatsPersistedStore = create<IStatsPersistedStore>()(
 	persist(
-		(set, get) => ({
-			latestSpeed: null,
-			latestAccuracy: null,
-			latestScore: null,
-			getStats: year => get()[year],
+		set => ({
+			completedTests: 0,
+			practiceDuration: 0,
+
+			latestSpeed: 0,
+			totalSpeed: 0,
+			bestSpeed: 0,
+			averageSpeed: 0,
+
+			latestAccuracy: 0,
+			totalAccuracy: 0,
+			averageAccuracy: 0,
+
+			latestScore: 0,
+			totalScore: 0,
+			bestScore: 0,
+			averageScore: 0,
+
+			stats: {},
 			addStats: stats =>
 				set(state => {
-					const today = new Date();
-					const year = today.getUTCFullYear();
-					const month = today.getUTCMonth();
-					const day = today.getUTCDate();
-					const prevStats = state.getStats(year)?.[month]?.[day];
+					const today = format(new Date(), "yyyyMMdd", { timeZone: "utc" });
+					const prevStats = state.stats[today];
 					return {
 						...state,
+						completedTests: state.completedTests + 1,
+						practiceDuration: state.practiceDuration + stats.duration,
+
 						latestSpeed: stats.speed,
+						totalSpeed: state.totalSpeed + stats.speed,
+						bestSpeed: stats.speed > state.bestSpeed ? stats.speed : state.bestSpeed,
+						averageSpeed: Math.round((state.totalSpeed || stats.speed) / (state.completedTests + 1)),
+
 						latestAccuracy: stats.accuracy,
+						totalAccuracy: state.totalAccuracy + stats.accuracy,
+						averageAccuracy: Math.round((state.totalAccuracy || stats.accuracy) / (state.completedTests + 1)),
+
 						latestScore: stats.score,
-						[year]: {
-							[month]: {
-								[day]: {
-									speed: prevStats ? [...prevStats?.speed, stats.speed] : [stats.speed],
-									accuracy: prevStats ? [...prevStats.accuracy, stats.accuracy] : [stats.accuracy],
-									score: prevStats ? [...prevStats?.score, stats.score] : [stats.score],
-								},
+						totalScore: state.totalScore + stats.score,
+						bestScore: stats.score > state.bestScore ? stats.score : state.bestScore,
+						averageScore: Math.round((state.totalScore || stats.score) / (state.completedTests + 1)),
+
+						stats: {
+							...state.stats,
+							[today]: {
+								tests: prevStats ? [...prevStats?.tests, stats.test] : [stats.test],
+								speed: prevStats ? [...prevStats?.speed, stats.speed] : [stats.speed],
+								accuracy: prevStats ? [...prevStats.accuracy, stats.accuracy] : [stats.accuracy],
+								score: prevStats ? [...prevStats?.score, stats.score] : [stats.score],
+								errors: prevStats ? [...prevStats?.errors, stats.errors] : [stats.errors],
 							},
 						},
 					};
@@ -52,6 +101,14 @@ const useStatsPersistedStore = create<IStatsPersistedStore>()(
 	)
 );
 
+export function useCompletedTests() {
+	return useStatsPersistedStore(state => state.completedTests);
+}
+
+export function usePracticeDuration() {
+	return useStatsPersistedStore(state => state.practiceDuration);
+}
+
 export function useLatestStats() {
 	return useStatsPersistedStore(state => ({
 		speed: state.latestSpeed,
@@ -59,13 +116,26 @@ export function useLatestStats() {
 		score: state.latestScore,
 	}));
 }
+export function useBestStats() {
+	return useStatsPersistedStore(state => ({
+		bestSpeed: state.bestSpeed,
+		bestScore: state.bestScore,
+	}));
+}
 
-export function useStats(year: number) {
-	return useStatsPersistedStore(state => state.getStats(year));
+export function useAverageStats() {
+	return useStatsPersistedStore(state => ({
+		averageSpeed: state.averageSpeed,
+		averageAccuracy: state.averageAccuracy,
+		averageScore: state.averageScore,
+	}));
+}
+
+export function useStats() {
+	return useStatsPersistedStore(state => state.stats);
 }
 
 export function useAddStats() {
 	return useStatsPersistedStore(state => state.addStats);
 }
-
 export default useStatsPersistedStore;

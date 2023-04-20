@@ -8,6 +8,7 @@ type Stats = {
 	accuracy: number[];
 	score: number[];
 	errors: number[];
+	wrongEntries: number[][];
 };
 
 interface IStatsPersistedStore {
@@ -37,6 +38,7 @@ interface IStatsPersistedStore {
 		duration: number;
 		test: string;
 		errors: number;
+		wrongEntries: number[];
 	}) => void;
 }
 
@@ -92,6 +94,9 @@ const useStatsPersistedStore = create<IStatsPersistedStore>()(
 								accuracy: prevStats ? [...prevStats.accuracy, stats.accuracy] : [stats.accuracy],
 								score: prevStats ? [...prevStats?.score, stats.score] : [stats.score],
 								errors: prevStats ? [...prevStats?.errors, stats.errors] : [stats.errors],
+								wrongEntries: prevStats
+									? [...prevStats?.wrongEntries, stats.wrongEntries]
+									: [stats.wrongEntries],
 							},
 						},
 					};

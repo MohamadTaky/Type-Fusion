@@ -1,4 +1,4 @@
-import { KeyboardEventHandler, useEffect, useRef } from "react";
+import { KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import useQuotesInfiniteQuery from "../hooks/useQuotesInfiniteQuery";
 import usePracticeStore, {
 	useCurrentLetterIndex,
@@ -30,6 +30,7 @@ export default function Quote() {
 	const pressKey = usePressKey();
 	const releaseKey = useReleaseKey();
 	const addStats = useAddStats();
+	const [correctPress, setCorrectPress] = useState(true);
 
 	useEffect(() => {
 		resetErrorCount();
@@ -59,6 +60,7 @@ export default function Quote() {
 		else if (currentQuote?.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
 		else incrementErrorCount();
 		pressKey(event.code, currentQuote?.at(currentLetterIndex) === event.key);
+		setCorrectPress(currentQuote?.at(currentLetterIndex) === event.key);
 	};
 
 	const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = event => {
@@ -78,7 +80,10 @@ export default function Quote() {
 			/>
 			<p className="tracking-wide max-w-[60ch] text-center mx-auto whitespace-pre-wrap">
 				<span className="text-success-1">{currentQuote?.slice(0, currentLetterIndex)}</span>
-				<span className="border-b-2">{currentQuote?.at(currentLetterIndex)}</span>
+				<span
+					className={`border-b-2 transition-colors duration-100 ${!correctPress ? "border-failure-1" : ""}`}>
+					{currentQuote?.at(currentLetterIndex)}
+				</span>
 				<span>{currentQuote?.slice(currentLetterIndex + 1)}</span>
 			</p>
 			<p className="text-right mt-20">{data?.pages[currentQuoteIndex].author}</p>

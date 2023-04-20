@@ -14,8 +14,6 @@ export default function KeyboardKey({ value, keyCode, className }: IProps) {
 		addKeycode(keyCode);
 	}, []);
 
-	console.log(key);
-
 	return (
 		key && (
 			<div

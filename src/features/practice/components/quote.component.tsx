@@ -57,10 +57,10 @@ export default function Quote() {
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = event => {
 		if (event.code === "Tab") event.preventDefault();
 		if (event.key.length > 1 || usePracticeStore.getState().keys[event.code].pressed) return;
-		else if (currentQuote?.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
+		else if (currentQuote.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
 		else incrementErrorCount();
-		pressKey(event.code, currentQuote?.at(currentLetterIndex) === event.key);
-		setCorrectPress(currentQuote?.at(currentLetterIndex) === event.key);
+		pressKey(event.code, currentQuote.at(currentLetterIndex) === event.key);
+		setCorrectPress(currentQuote.at(currentLetterIndex) === event.key);
 	};
 
 	const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = event => {
@@ -79,12 +79,12 @@ export default function Quote() {
 				onBlur={event => event.target.focus()}
 			/>
 			<p className="tracking-wide max-w-[60ch] text-center mx-auto whitespace-pre-wrap">
-				<span className="text-success-1">{currentQuote?.slice(0, currentLetterIndex)}</span>
+				<span className="text-success-1">{currentQuote.slice(0, currentLetterIndex)}</span>
 				<span
 					className={`border-b-2 transition-colors duration-100 ${!correctPress ? "border-failure-1" : ""}`}>
-					{currentQuote?.at(currentLetterIndex)}
+					{currentQuote.at(currentLetterIndex)}
 				</span>
-				<span>{currentQuote?.slice(currentLetterIndex + 1)}</span>
+				<span>{currentQuote.slice(currentLetterIndex + 1)}</span>
 			</p>
 			<p className="text-right mt-20">{data?.pages[currentQuoteIndex].author}</p>
 		</section>

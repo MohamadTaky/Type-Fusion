@@ -41,7 +41,7 @@ export default function LineChart({ width, height }: IProps) {
 
 	return (
 		<svg width={width} height={height} className="text-[10px]">
-			{yScale.ticks(yScale.domain()[1]).map(tick => (
+			{yScale.ticks(5).map(tick => (
 				<g transform={`translate(0 ${yScale(tick)})`}>
 					<text fill="currentColor" alignmentBaseline="middle" x={margins.left - 20}>
 						{tick}

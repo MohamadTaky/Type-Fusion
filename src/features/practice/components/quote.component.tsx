@@ -1,6 +1,6 @@
 import { KeyboardEventHandler, useEffect, useRef } from "react";
 import useQuotesInfiniteQuery from "../hooks/useQuotesInfiniteQuery";
-import {
+import usePracticeStore, {
 	useCurrentLetterIndex,
 	useIncrementCurrentLetterIndex,
 	useResetCurrentLetterIndex,
@@ -55,15 +55,15 @@ export default function Quote() {
 
 	const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = event => {
 		if (event.code === "Tab") event.preventDefault();
-		pressKey(event.code);
+		if (event.key.length > 1 || usePracticeStore.getState().keys[event.code].pressed) return;
+		else if (currentQuote?.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
+		else incrementErrorCount();
+		pressKey(event.code, currentQuote?.at(currentLetterIndex) === event.key);
 	};
 
 	const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = event => {
 		if (event.code === "Tab") event.preventDefault();
 		releaseKey(event.code);
-		if (event.key.length > 1) return;
-		else if (currentQuote?.at(currentLetterIndex) === event.key) incrementCurrentLetterIndex();
-		else incrementErrorCount();
 	};
 
 	return (

@@ -1,9 +1,9 @@
 import { create } from "zustand";
 
 interface PracticeStore {
-	keys: Record<string, boolean>;
+	keys: Record<string, { pressed: boolean; correct: boolean }>;
 	addKey: (code: string) => void;
-	pressKey: (code: string) => void;
+	pressKey: (code: string, correct: boolean) => void;
 	releaseKey: (code: string) => void;
 	currentLetterIndex: number;
 	incrementCurrentLetterIndex: () => void;
@@ -32,23 +32,32 @@ const usePracticeStore = create<PracticeStore>()(set => ({
 			...state,
 			keys: {
 				...state.keys,
-				[code]: false,
+				[code]: {
+					pressed: false,
+					correct: false,
+				},
 			},
 		})),
-	pressKey: code =>
+	pressKey: (code, correct) =>
 		set(state => ({
 			...state,
 			keys: {
 				...state.keys,
-				[code]: true,
+				[code]: {
+					pressed: true,
+					correct,
+				},
 			},
 		})),
-	releaseKey: code =>
+	releaseKey: (code) =>
 		set(state => ({
 			...state,
 			keys: {
 				...state.keys,
-				[code]: false,
+				[code]: {
+					pressed: false,
+					correct: false,
+				},
 			},
 		})),
 }));

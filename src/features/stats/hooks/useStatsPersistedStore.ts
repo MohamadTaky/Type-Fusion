@@ -89,13 +89,13 @@ const useStatsPersistedStore = create<IStatsPersistedStore>()(
 						stats: {
 							...state.stats,
 							[today]: {
-								tests: prevStats ? [...prevStats?.tests, stats.test] : [stats.test],
-								speed: prevStats ? [...prevStats?.speed, stats.speed] : [stats.speed],
-								accuracy: prevStats ? [...prevStats.accuracy, stats.accuracy] : [stats.accuracy],
-								score: prevStats ? [...prevStats?.score, stats.score] : [stats.score],
-								errors: prevStats ? [...prevStats?.errors, stats.errors] : [stats.errors],
+								tests: prevStats ? [stats.test, ...prevStats?.tests] : [stats.test],
+								speed: prevStats ? [stats.speed, ...prevStats?.speed] : [stats.speed],
+								accuracy: prevStats ? [stats.accuracy, ...prevStats.accuracy] : [stats.accuracy],
+								score: prevStats ? [stats.score, ...prevStats?.score] : [stats.score],
+								errors: prevStats ? [stats.errors, ...prevStats?.errors] : [stats.errors],
 								wrongEntries: prevStats
-									? [...prevStats?.wrongEntries, stats.wrongEntries]
+									? [stats.wrongEntries, ...prevStats?.wrongEntries]
 									: [stats.wrongEntries],
 							},
 						},

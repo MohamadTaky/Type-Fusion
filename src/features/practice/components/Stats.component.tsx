@@ -6,9 +6,9 @@ export default function Stats() {
 	const errorCount = useErrorCount();
 
 	return (
-		<div className="bg-fill-3 p-2 rounded-md flex justify-around text-sm">
+		<div className="flex justify-around rounded-md border-2 border-gray-300 bg-gray-200 p-2 text-sm dark:border-hatai-700 dark:bg-hatai-800">
 			<div>
-				Errors : <span className="text-failure-1">{errorCount}</span>
+				Errors : <span className="text-red-500">{errorCount}</span>
 			</div>
 			<div>
 				Speed: {speed || "N/A"} <span className="text-xs">wpm</span>

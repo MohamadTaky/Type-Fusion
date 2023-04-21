@@ -2,8 +2,8 @@ import KeyboardKey from "./keyboardKey.component";
 
 export default function Keyboard() {
 	return (
-		<div className="w-fit mx-auto p-4 bg-fill-3 font-mono rounded-md">
-			<div className="flex gap-2 justify-center">
+		<div className="mx-auto w-fit rounded-md border-2 border-gray-300 bg-gray-200 p-4 font-mono dark:border-hatai-700 dark:bg-hatai-800">
+			<div className="flex justify-center gap-2">
 				<KeyboardKey value="`" keyCode="Backquote" />
 				<KeyboardKey value="1" keyCode="Digit1" />
 				<KeyboardKey value="2" keyCode="Digit2" />
@@ -19,8 +19,8 @@ export default function Keyboard() {
 				<KeyboardKey value="=" keyCode="Equal" />
 				<KeyboardKey value="backspace" className="w-fit px-2" keyCode="Backspace" />
 			</div>
-			<div className="mt-2 flex gap-2 justify-center">
-				<KeyboardKey value="tab" className="w-fit px-2 flex-1" keyCode="Tab" />
+			<div className="mt-2 flex justify-center gap-2">
+				<KeyboardKey value="tab" className="w-fit flex-1 px-2" keyCode="Tab" />
 				<KeyboardKey value="Q" keyCode="KeyQ" />
 				<KeyboardKey value="W" keyCode="KeyW" />
 				<KeyboardKey value="E" keyCode="KeyE" />
@@ -33,9 +33,9 @@ export default function Keyboard() {
 				<KeyboardKey value="P" keyCode="KeyP" />
 				<KeyboardKey value="{" keyCode="BracketLeft" />
 				<KeyboardKey value="}" keyCode="BracketRight" />
-				<KeyboardKey value="|" className="w-fit px-2 flex-1" keyCode="Backslash" />
+				<KeyboardKey value="|" className="w-fit flex-1 px-2" keyCode="Backslash" />
 			</div>
-			<div className="mt-2 flex gap-2 justify-center">
+			<div className="mt-2 flex justify-center gap-2">
 				<KeyboardKey value="caps lock" className="w-fit px-2" keyCode="CapsLock" />
 				<KeyboardKey value="A" keyCode="KeyA" />
 				<KeyboardKey value="S" keyCode="KeyS" />
@@ -48,10 +48,10 @@ export default function Keyboard() {
 				<KeyboardKey value="L" keyCode="KeyL" />
 				<KeyboardKey value=";" keyCode="Semicolon" />
 				<KeyboardKey value="'" keyCode="Quote" />
-				<KeyboardKey value="Enter" className="w-fit px-2 flex-1" keyCode="Enter" />
+				<KeyboardKey value="Enter" className="w-fit flex-1 px-2" keyCode="Enter" />
 			</div>
-			<div className="mt-2 flex gap-2 justify-center">
-				<KeyboardKey value="Shift" className="w-fit px-2 flex-1" keyCode="ShiftLeft" />
+			<div className="mt-2 flex justify-center gap-2">
+				<KeyboardKey value="Shift" className="w-fit flex-1 px-2" keyCode="ShiftLeft" />
 				<KeyboardKey value="Z" keyCode="KeyZ" />
 				<KeyboardKey value="X" keyCode="KeyX" />
 				<KeyboardKey value="C" keyCode="KeyC" />
@@ -62,9 +62,9 @@ export default function Keyboard() {
 				<KeyboardKey value="," keyCode="Comma" />
 				<KeyboardKey value="." keyCode="Period" />
 				<KeyboardKey value="/" keyCode="Slash" />
-				<KeyboardKey value="Shift" className="w-fit px-2 flex-1" keyCode="ShiftRight" />
+				<KeyboardKey value="Shift" className="w-fit flex-1 px-2" keyCode="ShiftRight" />
 			</div>
-			<div className="mt-2 flex gap-2 justify-center">
+			<div className="mt-2 flex justify-center gap-2">
 				<KeyboardKey value="Ctrl" className="w-fit px-2" keyCode="ControlLeft" />
 				<KeyboardKey value="Alt" className="w-fit px-2" keyCode="AltLeft" />
 				<KeyboardKey value="__" className="w-full flex-1" keyCode="Space" />

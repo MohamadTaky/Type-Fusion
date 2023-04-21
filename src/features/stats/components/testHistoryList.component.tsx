@@ -7,7 +7,7 @@ export default function TestHistoryList() {
 	const today = stats[format(new Date(), "yyyyMMdd")];
 
 	return (
-		<ul className="flex-1 px-4 overflow-auto custom-scroll">
+		<ul className="custom-scroll flex-1 overflow-auto px-4">
 			{stats[format(new Date(), "yyyyMMdd")]?.tests.map((test, i) => (
 				<TestHistoryItem
 					initial={{ opacity: 0 }}

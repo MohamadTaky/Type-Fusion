@@ -82,31 +82,29 @@ export default function Quote() {
 	};
 
 	return (
-		<section className="bg-fill-3 p-8 rounded-md font-mono text-lg my-auto">
+		<section className="my-auto rounded-md border-2 border-gray-300 bg-gray-200 p-8 font-mono text-lg dark:border-hatai-700 dark:bg-hatai-800">
 			<input
 				type="text"
-				className="w-0 h-0 absolute"
+				className="absolute h-0 w-0"
 				onKeyDown={handleKeyDown}
 				onKeyUp={handleKeyUp}
 				autoFocus
 				onBlur={event => event.target.focus()}
 			/>
-			<p className="tracking-wide max-w-[60ch] text-center mx-auto whitespace-pre-wrap">
+			<p className="mx-auto max-w-[60ch] whitespace-pre-wrap text-center tracking-wide">
 				{currentQuote
 					.slice(0, currentLetterIndex)
 					.split("")
 					.map((letter, i) => (
-						<span className={wrontEntries.current.has(i) ? "text-failure-1" : "text-success-1"}>
-							{letter}
-						</span>
+						<span className={wrontEntries.current.has(i) ? "text-red-500" : "text-green-500"}>{letter}</span>
 					))}
 				<span
-					className={`border-b-2 transition-colors duration-100 ${!correctPress ? "border-failure-1" : ""}`}>
+					className={`border-b-2 ${!correctPress ? "border-red-500" : "border-black dark:border-gray-100"}`}>
 					{currentQuote.at(currentLetterIndex)}
 				</span>
 				<span>{currentQuote.slice(currentLetterIndex + 1)}</span>
 			</p>
-			<p className="text-right mt-20">{data?.pages[currentQuoteIndex].author}</p>
+			<p className="mt-20 text-right">{data?.pages[currentQuoteIndex].author}</p>
 		</section>
 	);
 }

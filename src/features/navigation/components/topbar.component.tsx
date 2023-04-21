@@ -1,28 +1,39 @@
 import { Sun, Moon } from "@phosphor-icons/react";
 import { useDarkMode, useToggleDarkMode } from "../usePreferencesPersistedStore";
-import { AnimatePresence, MotionConfig, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMemo } from "react";
 
 export default function TopBar() {
 	const darkMode = useDarkMode();
 	const toggleDarkMode = useToggleDarkMode();
 
-	const Icon = motion(darkMode ? Moon : Sun);
+	const MotionMoon = useMemo(() => motion(Moon), []);
+	const MotionSun = useMemo(() => motion(Sun), []);
 
 	return (
-		<div className="bg-fill-3 p-2 flex justify-end">
+		<div className="flex justify-end border-b-2 border-gray-300 bg-gray-200 p-2 dark:border-hatai-700 dark:bg-hatai-800">
 			<button onClick={toggleDarkMode}>
-				<MotionConfig transition={{ duration: 0.15 }}>
-					<AnimatePresence mode="wait">
-						<Icon
-							key={+darkMode}
+				<AnimatePresence mode="wait">
+					{darkMode ? (
+						<MotionMoon
+							className="text-indigo-600"
 							size="35"
 							weight="fill"
 							initial={{ opacity: 0 }}
-							animate={{ opacity: 1, color: darkMode ? "blueviolet" : "orange" }}
+							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
 						/>
-					</AnimatePresence>
-				</MotionConfig>
+					) : (
+						<MotionSun
+							className="text-orange-600"
+							size="35"
+							weight="fill"
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+						/>
+					)}
+				</AnimatePresence>
 			</button>
 		</div>
 	);

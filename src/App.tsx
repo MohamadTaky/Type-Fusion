@@ -15,8 +15,8 @@ function App() {
 	const darkMode = useDarkMode();
 	const location = useLocation();
 	return (
-		<div className={darkMode ? "dark-mode" : "light-mode"}>
-			<div className="h-screen text-1 bg-fill-4 grid grid-cols-[auto_1fr] grid-rows-[auto_1fr] overflow-hidden">
+		<div className={darkMode ? "dark" : ""}>
+			<div className="grid h-screen grid-cols-[auto_1fr] grid-rows-[auto_1fr] overflow-hidden bg-gray-50 dark:bg-hatai-900 dark:text-gray-100">
 				<QueryErrorBoundary>
 					<Suspense fallback={<SuspenseFallback />}>
 						<Navbar />

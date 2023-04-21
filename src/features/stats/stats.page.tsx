@@ -30,67 +30,87 @@ export default function StatsPage() {
 		}));
 
 	return (
-		<AnimatedPage className="grid grid-cols-5 grid-rows-[auto_275px_auto] lg:grid-rows-[auto_236px_auto]  gap-2 p-4">
+		<AnimatedPage className="grid grid-cols-5 grid-rows-[auto_275px_auto] gap-2 p-4 py-2 lg:grid-rows-[auto_236px_auto]">
 			{heatmapHeight && (
 				<>
-					<div className="bg-fill-3 rounded-lg overflow-hidden flex items-center">
-						<Lightning className="bg-fill-1 h-full box-content px-1 text-accent-2" size="34" weight="fill" />
-						<div className="p-2 flex-1">
+					<div className="flex items-center overflow-hidden rounded-lg bg-gray-200 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
+						<Lightning
+							className="box-content h-full bg-gray-300 px-1 text-indigo-600 dark:bg-hatai-600"
+							size="34"
+							weight="fill"
+						/>
+						<div className="flex-1 p-2">
 							<p className="text-2xl lg:text-3xl">
 								{bestSpeed}
 								<span className="text-sm"> wpm</span>
 							</p>
-							<p className="text-2 text-xs lg:text-sm">Best Speed</p>
+							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">Best Speed</p>
 						</div>
 					</div>
-					<div className="bg-fill-3 rounded-lg overflow-hidden flex items-center">
-						<Gauge className="bg-fill-1 h-full box-content px-1 text-accent-2" size="34" weight="fill" />
-						<div className="p-2 flex-1">
+					<div className="flex items-center overflow-hidden rounded-lg bg-gray-200 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
+						<Gauge
+							className="box-content h-full bg-gray-300 px-1 text-indigo-600 dark:bg-hatai-600"
+							size="34"
+							weight="fill"
+						/>
+						<div className="flex-1 p-2">
 							<p className="text-2xl lg:text-3xl">
 								{averageSpeed}
 								<span className="text-sm"> wpm</span>
 							</p>
-							<p className="text-2 text-xs lg:text-sm">Average Speed</p>
+							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">Average Speed</p>
 						</div>
 					</div>
-					<div className="bg-fill-3 rounded-lg overflow-hidden flex items-center">
-						<Target className="bg-fill-1 h-full box-content px-1 text-accent-2" size="34" weight="fill" />
-						<div className="p-2 flex-1">
+					<div className="flex items-center overflow-hidden rounded-lg bg-gray-200 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
+						<Target
+							className="box-content h-full bg-gray-300 px-1 text-indigo-600 dark:bg-hatai-600"
+							size="34"
+							weight="fill"
+						/>
+						<div className="flex-1 p-2">
 							<p className="text-2xl lg:text-3xl">
 								{averageAccuracy}
 								<span className="text-sm"> %</span>
 							</p>
-							<p className="text-2 text-xs lg:text-sm">Average Accuracy</p>
+							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">Average Accuracy</p>
 						</div>
 					</div>
-					<div className="bg-fill-3 rounded-lg overflow-hidden flex items-center">
-						<ListChecks className="bg-fill-1 h-full box-content px-1 text-accent-2" size="34" weight="fill" />
-						<div className="p-2 flex-1">
+					<div className="flex items-center overflow-hidden rounded-lg bg-gray-200 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
+						<ListChecks
+							className="box-content h-full bg-gray-300 px-1 text-indigo-600 dark:bg-hatai-600"
+							size="34"
+							weight="fill"
+						/>
+						<div className="flex-1 p-2">
 							<p className="text-2xl lg:text-3xl">{completedTests}</p>
-							<p className="text-2 text-xs lg:text-sm">Completed Tests</p>
+							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">Completed Tests</p>
 						</div>
 					</div>
-					<div className="bg-fill-3 rounded-lg overflow-hidden flex items-center">
-						<Clock className="bg-fill-1 h-full box-content px-1 text-accent-2" size="34" weight="fill" />
-						<div className="p-2 flex-1">
+					<div className="flex items-center overflow-hidden rounded-lg bg-gray-200 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
+						<Clock
+							className="box-content h-full bg-gray-300 px-1 text-indigo-600 dark:bg-hatai-600"
+							size="34"
+							weight="fill"
+						/>
+						<div className="flex-1 p-2">
 							<p className="text-2xl lg:text-3xl">{formatDuration(practiceDuration)}</p>
-							<p className="text-2 text-xs lg:text-sm">Practice Time</p>
+							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">Practice Time</p>
 						</div>
 					</div>
-					<div className="p-4 bg-fill-3 rounded-md col-span-3 flex flex-col">
-						<h2 className="text-xl mb-2">Weekly Statistics</h2>
+					<div className="col-span-3 flex flex-col rounded-md bg-gray-200 p-4 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
+						<h2 className="mb-2 text-xl">Weekly Statistics</h2>
 						<div className="flex-1" ref={lineChartContainerRef}>
 							<LineChart width={lineChartWidth} height={lineChartHeight} data={data} />
 						</div>
 					</div>
-					<div className="py-4 bg-fill-3 rounded-md col-span-2 flex flex-col">
+					<div className="col-span-2 flex flex-col rounded-md bg-gray-200 py-4 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
 						<h2 className="mx-4 mb-2 text-xl">Today Tests</h2>
 						<TestHistoryList />
 					</div>
 				</>
 			)}
-			<div className="p-4 py-2 bg-fill-3 rounded-md col-span-5">
-				<h2 className="text-xl mb-2">Yearly Activity : {format(new Date(), "yyyy")}</h2>
+			<div className="col-span-5 rounded-md bg-gray-200 p-4 py-2 dark:bg-hatai-800 border-2 dark:border-hatai-700 border-gray-300">
+				<h2 className="mb-2 text-xl">Yearly Activity : {format(new Date(), "yyyy")}</h2>
 				<div ref={heatMapContainerRef}>
 					<CalendarHeatmap data={data} width={heatMapWidth} />
 				</div>

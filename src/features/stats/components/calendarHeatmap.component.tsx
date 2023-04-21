@@ -24,16 +24,16 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 	const colorScale = scaleThreshold<number, string>()
 		.domain([1, 5, 10, 20])
 		.range([
-			"fill-fill-2",
-			"fill-accent-2 opacity-40",
-			"fill-accent-2 opacity-60",
-			"fill-accent-2 opacity-80",
-			"fill-accent-2",
+			"dark:fill-hatai-700 fill-gray-300",
+			"fill-indigo-600 opacity-40",
+			"fill-indigo-600 opacity-60",
+			"fill-indigo-600 opacity-80",
+			"fill-indigo-600",
 		]);
 
 	return (
-		<figure className="text-[10px] relative">
-			<svg width={width} height={cellSize * 8 + margins * 2} className="font-mono h-fit" fill="currentColor">
+		<figure className="relative text-[10px]">
+			<svg width={width} height={cellSize * 8 + margins * 2} className="h-fit font-mono" fill="currentColor">
 				{/* Month labels */}
 				{months.map(month => (
 					<text
@@ -96,7 +96,7 @@ function Tooltip({ x, y, children }: { x: number; y: number; children: string })
 	};
 	return (
 		<motion.figcaption
-			className="absolute pointer-events-none bg-accent-1 p-1 text-center rounded-md w-20"
+			className="pointer-events-none absolute w-20 rounded-md bg-indigo-400 p-1 text-center text-xs dark:bg-indigo-600"
 			transition={{ type: "tween", duration: 0.1, ease: "linear", opacity: { duration: 0.2 } }}
 			initial={{ ...position, opacity: 0 }}
 			animate={{ ...position, opacity: 1 }}

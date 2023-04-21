@@ -78,7 +78,7 @@ export default function LineChart({ width, height }: IProps) {
 				animate={{ strokeDashoffset: 0 }}
 				transition={{ duration: 1, delay: 0.15 + 0.2 }}
 				d={d}
-				className="stroke-accent-2 fill-none"
+				className="fill-none stroke-indigo-600"
 				strokeWidth="2"
 				pathLength="1"
 				strokeDasharray="1"
@@ -93,7 +93,7 @@ export default function LineChart({ width, height }: IProps) {
 							cx={xScale(day.date)}
 							cy={yScale(day.value)}
 							strokeWidth="3"
-							className="fill-accent-1 stroke-fill-3"
+							className="fill-indigo-600 stroke-gray-200 dark:stroke-hatai-800"
 						/>
 					)
 			)}

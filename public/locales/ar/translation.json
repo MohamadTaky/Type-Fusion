@@ -1,5 +1,19 @@
 {
 	"practice": "تدريب",
 	"stats": "إحصائيات",
-	"friends": "الأصدقاء"
+	"friends": "الأصدقاء",
+	"guest": "زائر",
+	"speed": "السرعة",
+	"accuracy": "الدقة",
+	"score": "النتيجة",
+	"errors": "الأخطاء",
+	"wpm": "كلمة في الدقيقة",
+	"best speed": "أفضل سرعة",
+	"average speed": "متوسط السرعة",
+	"average accuracy": "متوسط الدقة",
+	"completed tests": "إختبارات مكتملة",
+	"practice time": "وقت التمرين",
+	"weekly statistics": "إحصائيات أسبوعية",
+	"today tests": "إختبارات اليوم",
+	"yearly activity": "النشاط السنوي"
 }

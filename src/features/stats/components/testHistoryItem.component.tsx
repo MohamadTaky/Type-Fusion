@@ -1,4 +1,5 @@
 import { motion, MotionProps } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface IProps extends MotionProps {
 	test: string;
@@ -10,6 +11,7 @@ interface IProps extends MotionProps {
 
 export default function TestHistoryItem({ test, speed, accuracy, errors, wrongEntries, ...props }: IProps) {
 	const set = new Set(wrongEntries);
+	const { t } = useTranslation();
 	return (
 		<motion.li
 			className="border-b-2 border-gray-400 px-4 py-2 text-sm last:border-none hover:bg-gray-300 dark:border-hatai-600 dark:hover:bg-hatai-700"
@@ -18,10 +20,14 @@ export default function TestHistoryItem({ test, speed, accuracy, errors, wrongEn
 				<span className={set.has(i) ? "text-red-500" : ""}>{letter}</span>
 			))}
 			<div className=" text-2 mt-2 flex justify-between text-xs text-gray-600 dark:text-gray-400">
-				<span>speed : {speed}wpm</span>
-				<span>accuracy : {accuracy}%</span>
 				<span>
-					errors : <span className="text-red-500">{errors}</span>
+					{t("speed")} : {speed} {t("wpm")}
+				</span>
+				<span>
+					{t("accuracy")} : {accuracy}%
+				</span>
+				<span>
+					{t("errors")} : <span className="text-red-500">{errors}</span>
 				</span>
 			</div>
 		</motion.li>

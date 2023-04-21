@@ -82,7 +82,9 @@ export default function Quote() {
 	};
 
 	return (
-		<section className="my-auto rounded-md border-2 border-gray-300 bg-gray-200 p-8 font-mono text-lg dark:border-hatai-700 dark:bg-hatai-800">
+		<section
+			dir="auto"
+			className="my-auto rounded-md border border-gray-300 bg-gray-200 p-8 font-mono text-lg dark:border-hatai-600 dark:bg-hatai-800">
 			<input
 				type="text"
 				className="absolute h-0 w-0"

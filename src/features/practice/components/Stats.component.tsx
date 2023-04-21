@@ -1,23 +1,28 @@
 import { useErrorCount } from "../usePractice.store";
 import { useLatestStats } from "~/features/stats/hooks/useStatsPersistedStore";
+import { useTranslation } from "react-i18next";
 
 export default function Stats() {
 	const { speed, accuracy, score } = useLatestStats();
 	const errorCount = useErrorCount();
+	const { t } = useTranslation();
 
 	return (
-		<div className="flex justify-around rounded-md border-2 border-gray-300 bg-gray-200 p-2 text-sm dark:border-hatai-700 dark:bg-hatai-800">
+		<div className="flex justify-around rounded-md border border-gray-300 bg-gray-200 p-2 text-sm dark:border-hatai-600 dark:bg-hatai-800">
 			<div>
-				Errors : <span className="text-red-500">{errorCount}</span>
+				{t("errors")} : <span className="text-red-500">{errorCount}</span>
 			</div>
 			<div>
-				Speed: {speed || "N/A"} <span className="text-xs">wpm</span>
+				{t("speed")} : {speed || "N/A"}
+				{speed && <span className="text-xs"> wpm</span>}
 			</div>
 			<div>
-				Accuracy: {accuracy || "N/A"}
-				<span className="text-xs">%</span>
+				{t("accuracy")} : {accuracy || "N/A"}
+				{accuracy && <span className="text-xs">{} %</span>}
 			</div>
-			<div>Score: {score || "N/A"}</div>
+			<div>
+				{t("score")} : {score || "N/A"}
+			</div>
 		</div>
 	);
 }

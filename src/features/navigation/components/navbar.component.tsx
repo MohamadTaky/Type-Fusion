@@ -1,10 +1,12 @@
 import { User, ChartBar, Keyboard } from "@phosphor-icons/react";
 import coverImage from "/assets/cover-image.webp";
 import NavItem from "./navItem.component";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
+	const { t } = useTranslation();
 	return (
-		<aside className="row-span-2 bg-gray-200 dark:bg-hatai-800 border-r-2 dark:border-hatai-700 border-gray-300">
+		<aside className="row-span-2 border-r border-gray-300 bg-gray-200 dark:border-hatai-600 dark:bg-hatai-800">
 			<section className="relative grid h-64 grid-cols-1">
 				<div style={{ backgroundImage: `url(${coverImage})` }} className="col-start-1 row-start-1 bg-cover" />
 				<div className="col-start-1 row-start-1 max-h-full bg-gradient-to-b from-transparent from-50% to-gray-200 dark:to-hatai-800" />
@@ -14,7 +16,7 @@ export default function Navbar() {
 						weight="fill"
 						size="48"
 					/>
-					<figcaption className="text-center text-xl text-gray-100">Guest</figcaption>
+					<figcaption className="text-center text-xl text-gray-100">{t("guest")}</figcaption>
 				</figure>
 			</section>
 			<nav>

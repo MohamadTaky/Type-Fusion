@@ -10,12 +10,15 @@ import SuspenseAfterInitialRender from "./components/suspenseAfterInitialRender"
 import SuspenseFallback from "./components/fallbacks/suspenseFallback.component";
 import QueryErrorBoundary from "./components/fallbacks/queryErrorBoundary.component";
 import { useDarkMode } from "./features/navigation/usePreferencesPersistedStore";
+import { useTranslation } from "react-i18next";
 
 function App() {
 	const darkMode = useDarkMode();
 	const location = useLocation();
+	const { i18n } = useTranslation();
+
 	return (
-		<div className={darkMode ? "dark" : ""}>
+		<div dir={i18n.language === "ar" ? "rtl" : "ltr"} className={darkMode ? "dark" : ""}>
 			<div className="grid h-screen grid-cols-[auto_1fr] grid-rows-[auto_1fr] overflow-hidden bg-gray-50 dark:bg-hatai-900 dark:text-gray-100">
 				<QueryErrorBoundary>
 					<Suspense fallback={<SuspenseFallback />}>

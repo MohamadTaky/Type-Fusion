@@ -1,13 +1,15 @@
-import { timeMonths, scaleThreshold } from "d3";
+import { timeMonths, scaleThreshold, scaleLinear } from "d3";
 import { getDay, differenceInWeeks } from "date-fns";
 import { format } from "date-fns-tz";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function CalendarHeatmap({ data, width }: { data: { date: Date }[]; width: number }) {
 	const startDate = data[0].date as Date;
 	const endDate = data.at(-1)?.date as Date;
 	const months = timeMonths(startDate, endDate);
+	const { i18n } = useTranslation();
 
 	const [tooltip, setTooltip] = useState({
 		x: 0,
@@ -15,12 +17,7 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 		text: "",
 		isActive: false,
 	});
-	const margins = 5;
-
-	const innerWidth = width - margins * 2;
-
-	const cellSize = innerWidth > 0 ? (innerWidth - 18) / 53 : 0;
-
+	const cellSize = width > 0 ? (width - 18) / 53 : 0;
 	const colorScale = scaleThreshold<number, string>()
 		.domain([1, 5, 10, 20])
 		.range([
@@ -30,52 +27,55 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 			"fill-indigo-600 opacity-80",
 			"fill-indigo-600",
 		]);
+	const xScale = scaleLinear()
+		.domain([0, -differenceInWeeks(startDate, endDate) + 1])
+		.range(i18n.language === "ar" ? [width, 18 + 5] : [18 + 5, width]);
+	const yScale = scaleLinear()
+		.domain([0, 6])
+		.range([13.33 + 5, cellSize * 7]);
 
 	return (
 		<figure className="relative text-[10px]">
-			<svg width={width} height={cellSize * 8 + margins * 2} className="h-fit font-mono" fill="currentColor">
+			<svg width={width} height={13.3 + 5 + cellSize * 7} className="h-fit font-mono" fill="currentColor">
 				{/* Month labels */}
 				{months.map(month => (
-					<text
-						key={month.toString()}
-						y={margins + 13.33 - 5}
-						x={margins + 18 + -differenceInWeeks(startDate, month) * cellSize}>
+					<text key={month.toString()} y={13.3} x={xScale(-differenceInWeeks(startDate, month))}>
 						{format(month, "MMM", { timeZone: "utc" })}
 					</text>
 				))}
 
+				{/* <circle cx="10" cy={yScale(0)} r="1" fill="red" /> */}
+
 				{/* Week labels */}
-				<g transform={`translate(${margins},${margins + 13.33})`}>
-					{["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((el, i) => (
-						<text key={el} alignmentBaseline="middle" x="-5" y={i * cellSize + cellSize / 2}>
-							{el}
-						</text>
-					))}
-					{/* Heatmap */}
-					{data.map((el: any) => {
-						return (
-							<rect
-								key={el.date.toString()}
-								width={cellSize * 0.9}
-								height={cellSize * 0.9}
-								x={18 + -differenceInWeeks(startDate, el.date) * cellSize}
-								y={getDay(el.date) * cellSize}
-								strokeWidth={5}
-								rx={2}
-								className={`stroke-transparent ${colorScale(el.value)}`}
-								onMouseLeave={() => setTooltip(prev => ({ ...prev, isActive: false }))}
-								onMouseEnter={() =>
-									setTooltip({
-										text: format(el.date, "yyyy/M/d"),
-										x: 23 + -differenceInWeeks(startDate, el.date) * cellSize,
-										y: getDay(el.date) * cellSize,
-										isActive: true,
-									})
-								}
-							/>
-						);
-					})}
-				</g>
+				{["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((el, i) => (
+					<text key={el} x={xScale(-1)} y={yScale(i) + 5} alignmentBaseline="hanging">
+						{el}
+					</text>
+				))}
+				{/* Heatmap */}
+				{data.map((el: any) => {
+					return (
+						<rect
+							key={el.date.toString()}
+							width={cellSize * 0.9}
+							height={cellSize * 0.9}
+							x={xScale(-differenceInWeeks(startDate, el.date))}
+							y={yScale(getDay(el.date))}
+							strokeWidth={5}
+							rx={2}
+							className={`stroke-transparent ${colorScale(el.value)}`}
+							onMouseLeave={() => setTooltip(prev => ({ ...prev, isActive: false }))}
+							onMouseEnter={() =>
+								setTooltip({
+									text: format(el.date, "yyyy/M/d"),
+									x: xScale(-differenceInWeeks(startDate, el.date)),
+									y: getDay(el.date) * cellSize - 5,
+									isActive: true,
+								})
+							}
+						/>
+					);
+				})}
 			</svg>
 			<AnimatePresence>
 				{tooltip.isActive && (

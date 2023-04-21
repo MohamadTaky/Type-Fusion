@@ -2,6 +2,7 @@ import { extent, line, NumberValue, scaleLinear, curveMonotoneX } from "d3";
 import { useStats } from "../hooks/useStatsPersistedStore";
 import { startOfWeek, addDays, format } from "date-fns";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 interface IProps {
 	width: number;
@@ -10,11 +11,14 @@ interface IProps {
 }
 
 export default function LineChart({ width, height }: IProps) {
+	const { i18n } = useTranslation();
+	const isRtl = i18n.language === "ar";
+
 	const margins = {
 		top: 10,
-		right: 10,
+		right: isRtl ? 20 : 10,
 		bottom: 20,
-		left: 20,
+		left: isRtl ? 10 : 20,
 	};
 
 	const stats = useStats();
@@ -27,8 +31,7 @@ export default function LineChart({ width, height }: IProps) {
 
 	const xScale = scaleLinear()
 		.domain([0, 6])
-		.range([margins.left, width - margins.right]);
-
+		.range(isRtl ? [width - margins.right, margins.left] : [margins.left, width - margins.right]);
 	const yScale = scaleLinear()
 		.domain(extent(week.map(day => day.value)) as Iterable<NumberValue>)
 		.range([height - margins.bottom, margins.top]);
@@ -43,24 +46,24 @@ export default function LineChart({ width, height }: IProps) {
 		<svg width={width} height={height} className="text-[10px]">
 			{yScale.ticks(5).map(tick => (
 				<g transform={`translate(0 ${yScale(tick)})`}>
-					<text fill="currentColor" alignmentBaseline="middle" x={margins.left - 20}>
+					<text fill="currentColor" alignmentBaseline="middle" x={xScale(0) + (isRtl ? 20 : -20)}>
 						{tick}
 					</text>
 				</g>
 			))}
 			<line
-				x1={margins.left}
+				x1={xScale(0)}
 				y1={margins.top}
-				x2={margins.left}
+				x2={xScale(0)}
 				y2={height - margins.bottom}
 				stroke="currentColor"
 				strokeWidth="1"
 			/>
 			<line
 				x1={margins.left}
-				y1={height - margins.bottom}
+				y1={yScale(0)}
 				x2={width - margins.right}
-				y2={height - margins.bottom}
+				y2={yScale(0)}
 				stroke="currentColor"
 				strokeWidth="1"
 			/>

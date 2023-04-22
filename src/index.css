@@ -17,7 +17,6 @@
 		@apply rounded-md bg-indigo-600;
 	}
 	.custom-scroll::-webkit-scrollbar-track {
-	@apply bg-transparent;
+		@apply bg-transparent;
 	}
 }
-

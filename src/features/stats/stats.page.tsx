@@ -32,7 +32,7 @@ export default function StatsPage() {
 		}));
 
 	return (
-		<AnimatedPage className="grid grid-cols-5 grid-rows-[auto_275px_auto] gap-2 whitespace-nowrap p-4 lg:grid-rows-[auto_236px_auto]">
+		<AnimatedPage className="grid grid-cols-5 grid-rows-[auto_275px_auto] gap-2 p-4 lg:grid-rows-[auto_236px_auto]">
 			{heatmapHeight && (
 				<>
 					<div className="flex items-center overflow-hidden rounded-lg border border-gray-300 bg-gray-200 dark:border-hatai-600 dark:bg-hatai-800">

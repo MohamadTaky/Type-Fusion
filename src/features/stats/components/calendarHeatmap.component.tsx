@@ -76,6 +76,7 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 							x={xScale(-differenceInWeeks(startDate, el.date)) - (isRtl ? cellSize + textWidth : 0)}
 							y={yScale(getDay(el.date))}
 							rx={2}
+							strokeWidth="5"
 							className={`stroke-transparent ${colorScale(el.value)}`}
 							onMouseLeave={() => setTooltip(prev => ({ ...prev, isActive: false }))}
 							onMouseEnter={() =>

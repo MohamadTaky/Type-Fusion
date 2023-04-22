@@ -1,7 +1,6 @@
 {
 	"practice": "تدريب",
 	"stats": "إحصائيات",
-	"friends": "الأصدقاء",
 	"guest": "زائر",
 	"speed": "السرعة",
 	"accuracy": "الدقة",
@@ -15,5 +14,6 @@
 	"practice time": "وقت التمرين",
 	"weekly statistics": "إحصائيات أسبوعية",
 	"today tests": "إختبارات اليوم",
-	"yearly activity": "النشاط السنوي"
+	"yearly activity": "النشاط السنوي",
+	"no completed tests today": "لا توجد اختبارات مكتملة اليوم"
 }

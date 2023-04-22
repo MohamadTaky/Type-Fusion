@@ -1,19 +1,7 @@
 {
-	"practice": "Practice",
-	"stats": "Stats",
-	"friends": "Friends",
-	"guest": "Guest",
-	"speed": "Speed",
-	"accuracy": "Accuracy",
-	"score": "Score",
-	"errors": "Errors",
-	"wpm": "wpm",
-	"best speed": "Best Speed",
-	"average speed": "Average Speed",
-	"average accuracy": "Average Accuracy",
-	"completed tests": "Completed Tests",
-	"practice time": "Practice Time",
-	"weekly statistics": "Weekly Statistics",
-	"today tests": "Today Tests",
-	"yearly activity": "Yearly Activity"
+
+	"translation": {
+		"hello": "Hello",
+		"world": "World"
+	}
 }

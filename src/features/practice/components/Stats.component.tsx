@@ -8,13 +8,13 @@ export default function Stats() {
 	const { t } = useTranslation();
 
 	return (
-		<div className="flex justify-around rounded-md border border-gray-300 bg-gray-200 p-2 text-sm dark:border-hatai-600 dark:bg-hatai-800">
+		<div className="flex justify-around rounded-md border border-gray-300 bg-gray-200 p-2 text-sm capitalize dark:border-hatai-600 dark:bg-hatai-800">
 			<div>
 				{t("errors")} : <span className="text-red-500">{errorCount}</span>
 			</div>
 			<div>
 				{t("speed")} : {speed || "N/A"}
-				{speed && <span className="text-xs"> wpm</span>}
+				{speed && <span className="text-xs lowercase"> {t("wpm")}</span>}
 			</div>
 			<div>
 				{t("accuracy")} : {accuracy || "N/A"}

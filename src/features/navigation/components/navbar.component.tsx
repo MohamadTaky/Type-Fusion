@@ -16,7 +16,7 @@ export default function Navbar() {
 						weight="fill"
 						size="48"
 					/>
-					<figcaption className="text-center text-xl text-gray-100">{t("guest")}</figcaption>
+					<figcaption className="text-center text-xl text-gray-100 capitalize">{t("guest")}</figcaption>
 				</figure>
 			</section>
 			<nav>

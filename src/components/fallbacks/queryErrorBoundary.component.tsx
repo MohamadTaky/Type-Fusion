@@ -11,10 +11,10 @@ export default function QueryErrorBoundary({ children }: { children: React.React
 					onReset={reset}
 					fallbackRender={({ resetErrorBoundary, error }) => (
 						<div className="absolute inset-0 flex flex-col items-center justify-center">
-							<Warning className="text-failure-1" size="96" weight="fill" />
-							<p className="text-failure-1 text-lg mb-2">{error.message}</p>
+							<Warning className="text-red-500" size="96" weight="fill" />
+							<p className="mb-2 text-lg text-red-500">{error.message}</p>
 							<button
-								className="bg-accent-2 px-3 py-1 rounded transition-colors hover:bg-accent-1"
+								className="bg-indigo-600 hover:bg-indigo-500 rounded px-3 py-1 transition-colors"
 								onClick={resetErrorBoundary}>
 								<ArrowClockwise size="25" weight="bold" />
 							</button>

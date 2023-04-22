@@ -2,10 +2,12 @@ import TestHistoryItem from "./testHistoryItem.component";
 import { useStats } from "../hooks/useStatsPersistedStore";
 import { format } from "date-fns";
 import { Info } from "@phosphor-icons/react";
+import { useTranslation } from "react-i18next";
 
 export default function TestHistoryList() {
 	const stats = useStats();
 	const today = stats[format(new Date(), "yyyyMMdd")];
+	const { t } = useTranslation();
 
 	return (
 		<ul className="custom-scroll relative flex-1 overflow-auto px-4">
@@ -23,7 +25,7 @@ export default function TestHistoryList() {
 			)) ?? (
 				<div className="mx-auto mt-6 text-center text-gray-600 dark:text-gray-400">
 					<Info size="50" weight="fill" className="mx-auto" />
-					<p>No tests completed today</p>
+					<p className="first-letter:capitalize">{t("no completed tests today")}</p>
 				</div>
 			)}
 		</ul>

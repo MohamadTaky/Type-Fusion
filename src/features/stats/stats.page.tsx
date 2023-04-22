@@ -46,7 +46,9 @@ export default function StatsPage() {
 								{bestSpeed}
 								<span className="text-sm"> {t("wpm")}</span>
 							</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">{t("best speed")}</p>
+							<p className="text-xs capitalize text-gray-600 dark:text-gray-400 lg:text-sm">
+								{t("best speed")}
+							</p>
 						</div>
 					</div>
 					<div className="flex items-center overflow-hidden rounded-lg border border-gray-300 bg-gray-200 dark:border-hatai-600 dark:bg-hatai-800">
@@ -60,7 +62,9 @@ export default function StatsPage() {
 								{averageSpeed}
 								<span className="text-sm"> {t("wpm")}</span>
 							</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">{t("average speed")}</p>
+							<p className="text-xs capitalize text-gray-600 dark:text-gray-400 lg:text-sm">
+								{t("average speed")}
+							</p>
 						</div>
 					</div>
 					<div className="flex items-center overflow-hidden rounded-lg border border-gray-300 bg-gray-200 dark:border-hatai-600 dark:bg-hatai-800">
@@ -74,7 +78,9 @@ export default function StatsPage() {
 								{averageAccuracy}
 								<span className="text-sm"> %</span>
 							</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">{t("average accuracy")}</p>
+							<p className="text-xs capitalize text-gray-600 dark:text-gray-400 lg:text-sm">
+								{t("average accuracy")}
+							</p>
 						</div>
 					</div>
 					<div className="flex items-center overflow-hidden rounded-lg border border-gray-300 bg-gray-200 dark:border-hatai-600 dark:bg-hatai-800">
@@ -85,7 +91,9 @@ export default function StatsPage() {
 						/>
 						<div className="flex-1 p-2">
 							<p className="text-2xl lg:text-3xl">{completedTests}</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">{t("completed tests")}</p>
+							<p className="text-xs capitalize text-gray-600 dark:text-gray-400 lg:text-sm">
+								{t("completed tests")}
+							</p>
 						</div>
 					</div>
 					<div className="flex items-center overflow-hidden rounded-lg border border-gray-300 bg-gray-200 dark:border-hatai-600 dark:bg-hatai-800">
@@ -96,23 +104,25 @@ export default function StatsPage() {
 						/>
 						<div className="flex-1 p-2">
 							<p className="text-2xl lg:text-3xl">{formatDuration(practiceDuration)}</p>
-							<p className="text-xs text-gray-600 dark:text-gray-400 lg:text-sm">{t("practice time")}</p>
+							<p className="text-xs capitalize text-gray-600 dark:text-gray-400 lg:text-sm">
+								{t("practice time")}
+							</p>
 						</div>
 					</div>
 					<div className="col-span-3 flex flex-col rounded-md border border-gray-300 bg-gray-200 p-4 dark:border-hatai-600 dark:bg-hatai-800">
-						<h2 className="mb-2 text-xl">{t("weekly statistics")}</h2>
+						<h2 className="mb-2 text-xl capitalize">{t("weekly statistics")}</h2>
 						<div className="max-h-full flex-1" ref={lineChartContainerRef}>
 							<LineChart width={lineChartWidth} height={lineChartHeight} data={data} />
 						</div>
 					</div>
 					<div className="col-span-2 flex flex-col rounded-md border border-gray-300 bg-gray-200 py-4 dark:border-hatai-600 dark:bg-hatai-800">
-						<h2 className="mx-4 mb-2 text-xl">{t("today tests")}</h2>
+						<h2 className="mx-4 mb-2 text-xl capitalize">{t("today tests")}</h2>
 						<TestHistoryList />
 					</div>
 				</>
 			)}
 			<div className="col-span-5 rounded-md border border-gray-300 bg-gray-200 p-4 py-2 dark:border-hatai-600 dark:bg-hatai-800">
-				<h2 className="mb-2 text-xl">
+				<h2 className="mb-2 text-xl capitalize">
 					{t("yearly activity")} : {format(new Date(), "yyyy")}
 				</h2>
 				<div ref={heatMapContainerRef}>

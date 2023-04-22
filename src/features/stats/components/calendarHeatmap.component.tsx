@@ -17,7 +17,7 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 		text: "",
 		isActive: false,
 	});
-	const cellSize = width > 0 ? (width - 18) / 53 : 0;
+
 	const colorScale = scaleThreshold<number, string>()
 		.domain([1, 5, 10, 20])
 		.range([
@@ -27,28 +27,42 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 			"fill-indigo-600 opacity-80",
 			"fill-indigo-600",
 		]);
+	const textWidth = 18.01;
+	const textHeight = 13.33;
+	const cellSize = width > 0 ? (width - textWidth) / 53 : 0;
+	const isRtl = i18n.language === "ar";
+
 	const xScale = scaleLinear()
 		.domain([0, -differenceInWeeks(startDate, endDate) + 1])
-		.range(i18n.language === "ar" ? [width, 18 + 5] : [18 + 5, width]);
+		.range(i18n.language === "ar" ? [width - 5, textWidth] : [textWidth + 5, width]);
 	const yScale = scaleLinear()
 		.domain([0, 6])
-		.range([13.33 + 5, cellSize * 7]);
+		.range([textHeight, textHeight + cellSize * 6]);
 
 	return (
 		<figure className="relative text-[10px]">
-			<svg width={width} height={13.3 + 5 + cellSize * 7} className="h-fit font-mono" fill="currentColor">
+			<svg
+				width={width}
+				height={textHeight + 5 + cellSize * 7}
+				className="h-fit font-mono"
+				fill="currentColor">
 				{/* Month labels */}
 				{months.map(month => (
-					<text key={month.toString()} y={13.3} x={xScale(-differenceInWeeks(startDate, month))}>
+					<text
+						key={month.toString()}
+						y={yScale(0) - 5}
+						x={xScale(-differenceInWeeks(startDate, month)) - (isRtl ? textWidth : 0)}>
 						{format(month, "MMM", { timeZone: "utc" })}
 					</text>
 				))}
 
-				{/* <circle cx="10" cy={yScale(0)} r="1" fill="red" /> */}
-
 				{/* Week labels */}
 				{["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((el, i) => (
-					<text key={el} x={xScale(-1)} y={yScale(i) + 5} alignmentBaseline="hanging">
+					<text
+						key={el}
+						x={isRtl ? width : 0}
+						y={textHeight + yScale(i) - cellSize / 4}
+						alignmentBaseline="middle">
 						{el}
 					</text>
 				))}
@@ -59,17 +73,16 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 							key={el.date.toString()}
 							width={cellSize * 0.9}
 							height={cellSize * 0.9}
-							x={xScale(-differenceInWeeks(startDate, el.date))}
+							x={xScale(-differenceInWeeks(startDate, el.date)) - (isRtl ? cellSize + textWidth : 0)}
 							y={yScale(getDay(el.date))}
-							strokeWidth={5}
 							rx={2}
 							className={`stroke-transparent ${colorScale(el.value)}`}
 							onMouseLeave={() => setTooltip(prev => ({ ...prev, isActive: false }))}
 							onMouseEnter={() =>
 								setTooltip({
 									text: format(el.date, "yyyy/M/d"),
-									x: xScale(-differenceInWeeks(startDate, el.date)),
-									y: getDay(el.date) * cellSize - 5,
+									x: xScale(-differenceInWeeks(startDate, el.date)) - (isRtl ? cellSize + textWidth : 0),
+									y: getDay(el.date) * cellSize - 7,
 									isActive: true,
 								})
 							}

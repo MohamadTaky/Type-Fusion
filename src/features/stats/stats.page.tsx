@@ -22,7 +22,7 @@ export default function StatsPage() {
 	const stats = useStats();
 	const [heatMapContainerRef, { width: heatMapWidth, height: heatmapHeight }] = useMeasure();
 	const [lineChartContainerRef, { width: lineChartWidth, height: lineChartHeight }] = useMeasure();
-	const { t } = useTranslation();
+	const { t, i18n } = useTranslation();
 
 	const data = Array(getDaysInYear(new Date()))
 		.fill(0)
@@ -32,7 +32,7 @@ export default function StatsPage() {
 		}));
 
 	return (
-		<AnimatedPage className="grid grid-cols-5 grid-rows-[auto_275px_auto] gap-2 p-2 lg:grid-rows-[auto_236px_auto]">
+		<AnimatedPage className="grid grid-cols-5 grid-rows-[auto_275px_auto] gap-2 whitespace-nowrap p-4 lg:grid-rows-[auto_236px_auto]">
 			{heatmapHeight && (
 				<>
 					<div className="flex items-center overflow-hidden rounded-lg border border-gray-300 bg-gray-200 dark:border-hatai-600 dark:bg-hatai-800">
@@ -101,7 +101,7 @@ export default function StatsPage() {
 					</div>
 					<div className="col-span-3 flex flex-col rounded-md border border-gray-300 bg-gray-200 p-4 dark:border-hatai-600 dark:bg-hatai-800">
 						<h2 className="mb-2 text-xl">{t("weekly statistics")}</h2>
-						<div className="flex-1" ref={lineChartContainerRef}>
+						<div className="max-h-full flex-1" ref={lineChartContainerRef}>
 							<LineChart width={lineChartWidth} height={lineChartHeight} data={data} />
 						</div>
 					</div>
@@ -118,7 +118,7 @@ export default function StatsPage() {
 				<div ref={heatMapContainerRef}>
 					<CalendarHeatmap data={data} width={heatMapWidth} />
 				</div>
-		</div>
+			</div>
 		</AnimatedPage>
 	);
 }

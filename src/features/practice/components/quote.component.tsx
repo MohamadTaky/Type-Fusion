@@ -97,9 +97,8 @@ export default function Quote() {
 			dir="ltr"
 			className="relative my-auto overflow-hidden rounded-md border border-gray-300 bg-gray-200 p-8 font-mono text-lg dark:border-hatai-600 dark:bg-hatai-800">
 			<span
-				className={`pointer-events-none absolute inset-x-0 bottom-6 grid place-items-center font-sans text-sm transition-opacity ${
-					isFocused ? "opacity-0" : ""
-				}`}>
+				className={`pointer-events-none absolute inset-x-0 bottom-6 grid place-items-center font-sans text-sm transition-opacity
+				${isFocused ? "opacity-0" : ""}`}>
 				{t("test paused, click to continue")}
 			</span>
 			<div
@@ -120,9 +119,8 @@ export default function Quote() {
 							</span>
 						))}
 					<span
-						className={`border-b-2 ${
-							!correctPress ? "border-red-500" : "border-black dark:border-gray-100"
-						}`}>
+						className={`border-b-2 
+						${!correctPress ? "border-red-500" : "border-black dark:border-gray-100"}`}>
 						{currentQuote.at(currentLetterIndex)}
 					</span>
 					<span>{currentQuote.slice(currentLetterIndex + 1)}</span>

@@ -16,9 +16,9 @@ export default function TestHistoryItem({ test, speed, accuracy, errors, wrongEn
 		<motion.li
 			className="border-b-2 border-gray-400 px-4 py-2 text-sm last:border-none hover:bg-gray-300 rtl:text-end dark:border-hatai-600 dark:hover:bg-hatai-700"
 			{...props}>
-			<p>
+			<p dir="ltr" className="rtl:text-start">
 				{test.split("").map((letter, i) => (
-					<span className={set.has(i) ? "text-red-500" : ""}>{letter}</span>
+					<span dir="ltr" className={set.has(i) ? "text-red-500" : ""}>{letter}</span>
 				))}
 			</p>
 			<div className=" text-2 mt-2 flex justify-between text-xs text-gray-600 dark:text-gray-400">

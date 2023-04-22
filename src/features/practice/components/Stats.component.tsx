@@ -13,12 +13,24 @@ export default function Stats() {
 				{t("errors")} : <span className="text-red-500">{errorCount}</span>
 			</div>
 			<div>
-				{t("speed")} : {speed || "N/A"}
-				{speed && <span className="text-xs lowercase"> {t("wpm")}</span>}
+				{t("speed")} :{" "}
+				{speed ? (
+					<span>
+						{speed} <span className="text-xs lowercase">{t("wpm")}</span>
+					</span>
+				) : (
+					"N/A"
+				)}
 			</div>
 			<div>
-				{t("accuracy")} : {accuracy || "N/A"}
-				{accuracy && <span className="text-xs">{} %</span>}
+				{t("accuracy")} :{" "}
+				{accuracy ? (
+					<span dir="ltr">
+						{accuracy} <span className="text-xs">%</span>
+					</span>
+				) : (
+					"N/A"
+				)}
 			</div>
 			<div>
 				{t("score")} : {score || "N/A"}

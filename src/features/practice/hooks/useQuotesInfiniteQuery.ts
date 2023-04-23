@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 
-const TOTAL_PAGES = 257;
+const TOTAL_PAGES = 422;
 
 interface IQuote {
 	author: string;
@@ -31,7 +31,7 @@ export default function useQuotesInfiniteQuery() {
 }
 
 function fetchInfiniteQuotes({ pageParam = getRandomPage() }) {
-	return axios.get(`https://api.quotable.io/quotes?limit=5&maxLength=90&page=${pageParam}`);
+	return axios.get(`https://api.quotable.io/quotes?limit=5&maxLength=250&page=${pageParam}`);
 }
 
 function getRandomPage() {

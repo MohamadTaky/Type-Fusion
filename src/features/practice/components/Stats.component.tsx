@@ -8,7 +8,7 @@ export default function Stats() {
 	const { t } = useTranslation();
 
 	return (
-		<div className="flex justify-around rounded-md border border-gray-300 bg-gray-200 p-2 text-sm capitalize dark:border-hatai-600 dark:bg-hatai-800">
+		<div className="flex mt-auto justify-around rounded-md border border-gray-300 bg-gray-200 p-2 text-sm capitalize dark:border-hatai-600 dark:bg-hatai-800">
 			<div>
 				{t("errors")} : <span className="text-red-500">{errorCount}</span>
 			</div>

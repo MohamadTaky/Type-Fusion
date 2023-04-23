@@ -96,7 +96,7 @@ export default function Quote() {
 	return (
 		<section
 			dir="ltr"
-			className="relative my-auto overflow-hidden rounded-md border border-gray-300 bg-gray-200 p-8 font-mono text-lg dark:border-hatai-600 dark:bg-hatai-800">
+			className="relative min-h-[200px] overflow-hidden rounded-md border border-gray-300 bg-gray-200 font-mono dark:border-hatai-600 dark:bg-hatai-800">
 			<span
 				className={`pointer-events-none absolute inset-x-0 bottom-6 grid place-items-center font-sans text-sm transition-opacity
 				${isFocused ? "opacity-0" : ""}`}>
@@ -109,7 +109,7 @@ export default function Quote() {
 				onBlur={() => setIsFocused(false)}
 				onKeyDown={handleKeyDown}
 				onKeyUp={handleKeyUp}
-				className={`relative blur-md  transition focus:outline-none focus:blur-none`}>
+				className={`flex h-full flex-col justify-between p-4 blur-md transition focus:outline-none focus:blur-none`}>
 				<p className="mx-auto max-w-[60ch] whitespace-pre-wrap text-center tracking-wide">
 					{currentQuote
 						.slice(0, currentLetterIndex)
@@ -126,7 +126,7 @@ export default function Quote() {
 					</span>
 					<span>{currentQuote.slice(currentLetterIndex + 1)}</span>
 				</p>
-				<p className="mt-20 text-right">{data?.pages[currentQuoteIndex].author}</p>
+				<p className="text-right">{data?.pages[currentQuoteIndex].author}</p>
 			</div>
 		</section>
 	);

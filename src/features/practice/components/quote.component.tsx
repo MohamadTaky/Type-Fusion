@@ -55,6 +55,7 @@ export default function Quote() {
 	}, [currentQuoteIndex]);
 
 	useEffect(() => {
+		if (currentLetterIndex === 1) previousTime.current = Date.now();
 		if (currentLetterIndex !== currentQuote.length) return;
 
 		const duration = Date.now() - previousTime.current;
@@ -114,7 +115,7 @@ export default function Quote() {
 						.slice(0, currentLetterIndex)
 						.split("")
 						.map((letter, i) => (
-							<span className={wrontEntries.current.has(i) ? "text-red-500" : "text-green-500"}>
+							<span key={letter} className={wrontEntries.current.has(i) ? "text-red-500" : "text-green-500"}>
 								{letter}
 							</span>
 						))}

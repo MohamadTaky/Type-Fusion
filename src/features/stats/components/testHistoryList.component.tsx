@@ -13,6 +13,7 @@ export default function TestHistoryList() {
 		<ul className="custom-scroll relative flex-1 overflow-auto px-4">
 			{stats[format(new Date(), "yyyyMMdd")]?.tests.map((test, i) => (
 				<TestHistoryItem
+					key={`history${test}`}
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ ease: "easeInOut", delay: 0.15 + i * 0.1 }}

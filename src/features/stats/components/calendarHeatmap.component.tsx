@@ -49,7 +49,7 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 				{/* Month labels */}
 				{months.map(month => (
 					<text
-						key={month.toString()}
+						key={`heatmapMonth${month.toString()}`}
 						y={yScale(0) - 5}
 						x={xScale(-differenceInWeeks(startDate, month)) - (isRtl ? textWidth : 0)}>
 						{format(month, "MMM", { timeZone: "utc" })}
@@ -59,7 +59,7 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 				{/* Week labels */}
 				{["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((el, i) => (
 					<text
-						key={el}
+						key={`heatmapDay${el}`}
 						x={isRtl ? width : 0}
 						y={textHeight + yScale(i) - cellSize / 4}
 						alignmentBaseline="middle">
@@ -70,7 +70,7 @@ export default function CalendarHeatmap({ data, width }: { data: { date: Date }[
 				{data.map((el: any) => {
 					return (
 						<rect
-							key={el.date.toString()}
+							key={`heatMapRect${el.date.toString()}`}
 							width={cellSize * 0.9}
 							height={cellSize * 0.9}
 							x={xScale(-differenceInWeeks(startDate, el.date)) - (isRtl ? cellSize + textWidth : 0)}

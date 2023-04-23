@@ -1,4 +1,4 @@
-import { extent, line, NumberValue, scaleLinear, curveMonotoneX } from "d3";
+import { extent, line, scaleLinear, curveMonotoneX } from "d3";
 import { useStats } from "../hooks/useStatsPersistedStore";
 import { startOfWeek, addDays, format } from "date-fns";
 import useMeasure from "react-use-measure";
@@ -19,7 +19,7 @@ export default function LineChart({ width, height, ySpacing = 5, xSpacing = 10 }
 		parentRef.current && window.getComputedStyle(parentRef.current).getPropertyValue("direction") === "rtl";
 
 	const [weekLabelRef, { height: weekLabelHeight, width: weekLabelWidth }] = useMeasure();
-	const [TickRef, { width: tickWidth, height: tickHeight }] = useMeasure();
+	const [tickRef, { width: tickWidth, height: tickHeight }] = useMeasure();
 
 	const stats = useStats();
 	const week = Array(7)
@@ -53,7 +53,8 @@ export default function LineChart({ width, height, ySpacing = 5, xSpacing = 10 }
 				.filter(tick => tick % 1 === 0)
 				.map(tick => (
 					<text
-						ref={TickRef}
+						key={`lineY${tick}`}
+						ref={tickRef}
 						fill="currentColor"
 						alignmentBaseline="middle"
 						x={xScale(0) + (isRtl ? weekLabelWidth / 2 + tickWidth + xSpacing : -tickWidth - xSpacing)}
@@ -61,30 +62,18 @@ export default function LineChart({ width, height, ySpacing = 5, xSpacing = 10 }
 						{tick}
 					</text>
 				))}
-			<line
-				x1={xScale.range()[0]}
-				y1={yScale.range()[1]}
-				x2={xScale.range()[0]}
-				y2={yScale.range()[0]}
-				stroke="currentColor"
-				strokeWidth="1"
-			/>
-			<line
-				x1={xScale.range()[0]}
-				y1={yScale.range()[0]}
-				x2={xScale.range()[1]}
-				y2={yScale.range()[0]}
-				stroke="currentColor"
-				strokeWidth="1"
-			/>
-
+			<g stroke="currentColor" strokeWidth="1">
+				<line x1={xScale.range()[0]} y1={yScale.range()[1]} x2={xScale.range()[0]} y2={yScale.range()[0]} />
+				<line x1={xScale.range()[0]} y1={yScale.range()[0]} x2={xScale.range()[1]} y2={yScale.range()[0]} />
+			</g>
 			{xScale.ticks(7).map(tick => (
 				<text
+					key={`lineX${tick}`}
 					ref={weekLabelRef}
 					textAnchor="middle"
 					fill="currentColor"
 					x={xScale(tick)}
-					y={yScale(0) + weekLabelHeight + ySpacing}>
+					y={yScale.range()[0] + weekLabelHeight + ySpacing}>
 					{format(addDays(startOfWeek(new Date()), tick), "E")}
 				</text>
 			))}
@@ -103,6 +92,7 @@ export default function LineChart({ width, height, ySpacing = 5, xSpacing = 10 }
 				(day, i) =>
 					day.value && (
 						<motion.circle
+							key={`lineCircle${i}`}
 							transition={{ type: "spring", delay: 0.15 + (i / (week.length - 1)) * 0.2 }}
 							animate={{ r: [0, 7] }}
 							cx={xScale(day.date)}

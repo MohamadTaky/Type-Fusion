@@ -75,16 +75,16 @@ const useStatsPersistedStore = create<IStatsPersistedStore>()(
 						latestSpeed: stats.speed,
 						totalSpeed: state.totalSpeed + stats.speed,
 						bestSpeed: stats.speed > state.bestSpeed ? stats.speed : state.bestSpeed,
-						averageSpeed: Math.round((state.totalSpeed || stats.speed) / (state.completedTests + 1)),
+						averageSpeed: Math.round((state.totalSpeed + stats.speed) / (state.completedTests + 1)),
 
 						latestAccuracy: stats.accuracy,
 						totalAccuracy: state.totalAccuracy + stats.accuracy,
-						averageAccuracy: Math.round((state.totalAccuracy || stats.accuracy) / (state.completedTests + 1)),
+						averageAccuracy: Math.round((state.totalAccuracy + stats.accuracy) / (state.completedTests + 1)),
 
 						latestScore: stats.score,
 						totalScore: state.totalScore + stats.score,
 						bestScore: stats.score > state.bestScore ? stats.score : state.bestScore,
-						averageScore: Math.round((state.totalScore || stats.score) / (state.completedTests + 1)),
+						averageScore: Math.round((state.totalScore + stats.score) / (state.completedTests + 1)),
 
 						stats: {
 							...state.stats,

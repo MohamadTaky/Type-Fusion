@@ -18,7 +18,9 @@ export default function TestHistoryItem({ test, speed, accuracy, errors, wrongEn
 			{...props}>
 			<p dir="ltr" className="rtl:text-start">
 				{test.split("").map((letter, i) => (
-					<span dir="ltr" className={set.has(i) ? "text-red-500" : ""}>{letter}</span>
+					<span key={`${test}${i}`} dir="ltr" className={set.has(i) ? "text-red-500" : ""}>
+						{letter}
+					</span>
 				))}
 			</p>
 			<div className=" text-2 mt-2 flex justify-between text-xs text-gray-600 dark:text-gray-400">

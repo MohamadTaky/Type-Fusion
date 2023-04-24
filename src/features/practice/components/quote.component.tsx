@@ -115,7 +115,7 @@ export default function Quote() {
 						.slice(0, currentLetterIndex)
 						.split("")
 						.map((letter, i) => (
-							<span key={letter} className={wrontEntries.current.has(i) ? "text-red-500" : "text-green-500"}>
+							<span key={i} className={wrontEntries.current.has(i) ? "text-red-500" : "text-green-500"}>
 								{letter}
 							</span>
 						))}

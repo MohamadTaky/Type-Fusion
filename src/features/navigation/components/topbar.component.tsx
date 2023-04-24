@@ -16,7 +16,7 @@ export default function TopBar() {
 
 	return (
 		<div className="flex items-center gap-4 border-b border-gray-300 bg-gray-200 p-2 dark:border-hatai-600 dark:bg-hatai-800">
-			<button onClick={toggleDarkMode}>
+			<button className="rounded-sm outline-none focus:outline-indigo-600" onClick={toggleDarkMode}>
 				<AnimatePresence mode="wait">
 					{darkMode ? (
 						<MotionMoon
@@ -40,8 +40,10 @@ export default function TopBar() {
 				</AnimatePresence>
 			</button>
 			<div className="relative">
-				<button onClick={() => setIsOpen(prev => !prev)}>
-					<Translate size="35" className="box-content pt-1" />
+				<button
+					className="rounded-sm outline-none focus:outline-indigo-600"
+					onClick={() => setIsOpen(prev => !prev)}>
+					<Translate size="35" />
 				</button>
 				<AnimatePresence>
 					{isOpen && (

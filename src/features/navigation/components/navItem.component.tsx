@@ -8,10 +8,10 @@ export default function NavItem({ Icon, label, ...props }: IProps) {
 		<NavLink
 			{...props}
 			className={({ isActive }) =>
-				`flex items-center gap-4 bg-gray-300 p-2 px-4 capitalize ltr:pr-11 rtl:pl-11 dark:bg-hatai-700 ${
+				`flex items-center focus:outline-none gap-4 bg-gray-300 p-2 px-4 capitalize ltr:pr-11 rtl:pl-11 dark:bg-hatai-700 ${
 					isActive
 						? "text-indigo-600"
-						: "bg-opacity-0 hover:bg-opacity-50 dark:bg-opacity-0 dark:hover:bg-opacity-50"
+						: "bg-opacity-0 hover:bg-opacity-50 focus:bg-opacity-50 dark:bg-opacity-0 dark:hover:bg-opacity-50 dark:focus:bg-opacity-50"
 				}`
 			}>
 			<Icon weight="fill" size="25" />

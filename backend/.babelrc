@@ -5,8 +5,7 @@
 			"module-resolver",
 			{
 				"root": ["./src"]
-			},
-			"@babel/plugin-transform-modules-commonjs"
+			}
 		]
 	]
 }

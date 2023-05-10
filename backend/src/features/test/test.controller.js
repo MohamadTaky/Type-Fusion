@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import User from "#root/features/users/user.model.js";
+import User from "features/users/user.model.js";
 import Test from "./test.model.js";
-import Exception from "#root/common/classes/Exception.class.js";
+import Exception from "common/classes/Exception.class.js";
 
 export async function getUserData(req, res, next) {
 	if (!mongoose.Types.ObjectId.isValid(req.id)) {

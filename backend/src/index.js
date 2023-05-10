@@ -1,9 +1,9 @@
 import { config } from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
-import statsRouter from "#root/features/test/test.router.js";
-import userRouter from "#root/features/users/user.router.js";
-import errorHandler from "#root/common/middleware/errorHandler.middleware.js";
+import statsRouter from "features/test/test.router.js";
+import userRouter from "features/users/user.router.js";
+import errorHandler from "common/middleware/errorHandler.middleware.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 

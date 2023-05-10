@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcryptjs";
 import validator from "validator";
-import Exception from "#root/common/classes/Exception.class.js";
+import Exception from "common/classes/Exception.class.js";
 
 const UserSchema = new Schema(
 	{

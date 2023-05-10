@@ -1,4 +1,4 @@
-import Exception from "#root/common/classes/Exception.class.js";
+import Exception from "common/classes/Exception.class.js";
 import jwt from "jsonwebtoken";
 import User from "./user.model.js";
 

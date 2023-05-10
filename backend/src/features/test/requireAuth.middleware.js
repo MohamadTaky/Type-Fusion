@@ -1,7 +1,6 @@
-import Exception from "#root/common/classes/Exception.class.js";
+import Exception from "common/classes/Exception.class.js";
 import jwt from "jsonwebtoken";
-import User from "#root/features/users/user.model.js";
-import mongoose from "mongoose";
+import User from "features/users/user.model.js";
 
 export default async function requireAuth(req, res, next) {
 	try {

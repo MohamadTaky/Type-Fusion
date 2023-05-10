@@ -4,15 +4,15 @@ import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
-export default ({mode}) => {
-	const env = loadEnv(mode, process.cwd(), '');
+export default ({ mode }) => {
+	const env = loadEnv(mode, process.cwd(), "");
 	return defineConfig({
 		plugins: [react(), tsconfigPaths()],
 		server: {
 			port: 3000,
 			proxy: {
-				"/api": env.API,
+				"/api": env.NODE_ENV === "production" ? process.env.API : env.API,
 			},
 		},
 	});
-}
+};

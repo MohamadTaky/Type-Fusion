@@ -14,7 +14,6 @@ import { useDarkMode } from "./features/navigation/usePreferencesPersistedStore"
 import { useTranslation } from "react-i18next";
 
 function App() {
-	console.log(import.meta.env.VITE_VERCEL_ENV);
 	const darkMode = useDarkMode();
 	const location = useLocation();
 	const { i18n } = useTranslation();

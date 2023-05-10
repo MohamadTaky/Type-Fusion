@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "Cousine";
+	font-weight: 400;
+	src: url("/assets/fonts/cousine-regular-webfont.woff2") format("woff2"),
+		url("/assets/fonts/cousine-regular-webfont.woff") format("woff");
+}
+
+:root {
+	--color-accent: 79 70 229;
+	--color-fill-1: 156 163 175;
+	--color-fill-2: 209 213 219;
+	--color-fill-3: 229 231 235;
+	--color-fill-4: 249 250 251;
+	--color-primary: 0 0 0;
+	--color-secondary: 75 85 99;
+	--color-error-1: 248 113 113;
+	--color-error-2: 239 68 68;
+}
+
+.dark {
+	--color-fill-1: 36 36 76;
+	--color-fill-2: 30 30 62;
+	--color-fill-3: 22 22 46;
+	--color-fill-4: 15 15 31;
+	--color-primary: 243 244 246;
+	--color-secondary: 156 163 175;
+	--color-error-1: 185 28 28;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 5000000s ease-in-out 0s;
+	-webkit-text-fill-color: rgb(var(--color-primary));
+}
+input:disabled:-webkit-autofill:disabled {
+-webkit-text-fill-color: rgb(var(--color-secondary));
+}
+
+@layer components {
+	.custom-scroll::-webkit-scrollbar {
+		@apply w-1.5;
+	}
+	.custom-scroll::-webkit-scrollbar-thumb {
+		@apply rounded-md bg-indigo-600;
+	}
+	.custom-scroll::-webkit-scrollbar-track {
+		@apply bg-transparent;
+	}
+}

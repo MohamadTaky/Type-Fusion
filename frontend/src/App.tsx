@@ -14,9 +14,11 @@ import { useDarkMode } from "./features/navigation/usePreferencesPersistedStore"
 import { useTranslation } from "react-i18next";
 
 function App() {
+	console.log(process.env.API);
 	const darkMode = useDarkMode();
 	const location = useLocation();
 	const { i18n } = useTranslation();
+
 
 	return (
 		<div dir={i18n.language === "ar" ? "rtl" : "ltr"} className={darkMode ? "dark" : ""}>

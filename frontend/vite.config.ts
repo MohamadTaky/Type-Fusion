@@ -10,7 +10,7 @@ export default ({ mode }) => {
 		server: {
 			port: 3000,
 			proxy: {
-				"/api": process.env.VITE_VERCEL_ENV === "production" ? process.env.API : "http://localhost:8000",
+				"/api": "http://localhost:8000",
 			},
 		},
 	});

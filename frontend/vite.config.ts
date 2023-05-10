@@ -5,13 +5,13 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default ({mode}) => {
-	process.env = { ...process.env, ...loadEnv(mode, process.cwd(), "") };
+	const env = loadEnv(mode, process.cwd(), '');
 	return defineConfig({
 		plugins: [react(), tsconfigPaths()],
 		server: {
 			port: 3000,
 			proxy: {
-				"/api": process.env.API,
+				"/api": env.API,
 			},
 		},
 	});

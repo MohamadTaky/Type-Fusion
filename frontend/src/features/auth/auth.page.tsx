@@ -29,7 +29,7 @@ export default function AuthPage() {
 	return (
 		<AnimatedPage className="grid place-items-center">
 			<div className="overflow-hidden rounded-md border border-gray-300 bg-gray-200 p-4 dark:border-hatai-600 dark:bg-hatai-800">
-				<h2 className="text-center text-2xl font-bold">Typing Test</h2>
+				<h2 className="text-center text-2xl font-bold">Type Fusion</h2>
 				<MotionConfig transition={{ duration: 0.4 }}>
 					<motion.div animate={{ height: formHeight }} className="my-4">
 						<AnimatePresence mode="wait">

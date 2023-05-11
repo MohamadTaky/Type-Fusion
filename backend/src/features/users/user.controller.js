@@ -49,7 +49,7 @@ export async function signup(req, res, next) {
 				httpOnly: true,
 				secure,
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
-				domain: "typefusion.vercel.app",
+				domain: ".vercel.app",
 			})
 			.status(200)
 			.json({ email });

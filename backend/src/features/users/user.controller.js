@@ -69,7 +69,7 @@ export async function signout(req, res, next) {
 			res
 				.status(200)
 				.clearCookie("token", {
-					sameSite: "one",
+					sameSite: "none",
 					secure: true,
 				})
 				.json({ message: "signed out successfully" });

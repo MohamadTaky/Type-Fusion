@@ -28,6 +28,8 @@ export async function singin(req, res, next) {
 		res
 			.cookie("token", token, {
 				httpOnly: true,
+				sameSite: "none",
+				secure: true,
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
 			})
 			.status(200)
@@ -67,7 +69,7 @@ export async function signout(req, res, next) {
 			res
 				.status(200)
 				.clearCookie("token", {
-					sameSite: "none",
+					sameSite: "one",
 					secure: true,
 				})
 				.json({ message: "signed out successfully" });

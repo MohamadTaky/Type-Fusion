@@ -28,9 +28,9 @@ export async function singin(req, res, next) {
 		res
 			.cookie("token", token, {
 				httpOnly: true,
-				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
 				secure: true,
-				sameSite: "None"
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
+
 			})
 			.status(200)
 			.json({ email });

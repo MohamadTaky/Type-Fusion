@@ -13,6 +13,6 @@ export default function useTestsQuery() {
 }
 
 async function getTests({ queryKey }: QueryFunctionContext) {
-	if (queryKey[1]) return request({ url: "/api/data" });
+	if (queryKey[1]) return request({ url: "/api/data", withCredentials: true });
 	else return Promise.resolve({ data: useStatsPersistedStore.getState() });
 }

@@ -62,7 +62,13 @@ export async function signout(req, res, next) {
 	try {
 		const { _id } = jwt.verify(token, process.env.SECRET);
 		if (await User.exists({ _id })) {
-			res.status(200).clearCookie("token").json({ message: "signed out successfully" });
+			res
+				.status(200)
+				.clearCookie("token", {
+					sameSite: "none",
+					secure: true,
+				})
+				.json({ message: "signed out successfully" });
 		}
 	} catch (error) {
 		next(error);

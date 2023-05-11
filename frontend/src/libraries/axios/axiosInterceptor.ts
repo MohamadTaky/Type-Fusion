@@ -1,6 +1,8 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosInterceptorManager, AxiosError } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
 const client = axios.create({ baseURL: import.meta.env.API ?? "" });
+
+console.log(import.meta.env.MODE);
 
 export default function request({ ...options }: AxiosRequestConfig): Promise<AxiosResponse> {
 	const onError = (error: AxiosError) => error;

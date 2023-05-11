@@ -28,8 +28,6 @@ export async function singin(req, res, next) {
 		res
 			.cookie("token", token, {
 				httpOnly: true,
-				secure: true,
-				sameSite: "None",
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
 			})
 			.status(200)
@@ -47,9 +45,7 @@ export async function signup(req, res, next) {
 		res
 			.cookie("token", token, {
 				httpOnly: true,
-				secure,
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
-				domain: ".vercel.app",
 			})
 			.status(200)
 			.json({ email });

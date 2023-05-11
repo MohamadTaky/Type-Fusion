@@ -7,5 +7,5 @@ export default function useAddTestMutation() {
 }
 
 function addTest({ test }: { test: any }) {
-	return request({ url: "api/data", data: test });
+	return request({ url: "api/data", data: test, method: "post" });
 }

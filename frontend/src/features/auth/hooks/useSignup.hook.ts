@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosError, AxiosResponse } from "axios";
-import request from "~/libraries/axios/axiosInterceptor";
+import axios, { AxiosError, AxiosResponse } from "axios";
 
 interface IProps {
 	email: string;
@@ -23,7 +22,7 @@ async function signup({ email, password, confirmedPassword }: IProps) {
 	if (password != confirmedPassword) throw Error("passwords does not match");
 	try {
 		const results = await Promise.allSettled([
-			request({ url: "/api/user/signup", data: { email, password }, method: "post" }),
+			axios.post("/api/user/signup", { email, password }),
 			new Promise(resolve => setTimeout(resolve, 1500)),
 		]);
 		results.forEach(result => {

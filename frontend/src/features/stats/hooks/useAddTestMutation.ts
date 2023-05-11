@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import request from "~/libraries/axios/axiosInterceptor";
+import axios from "axios";
 
 export default function useAddTestMutation() {
 	const client = useQueryClient();
-	return useMutation(addTest, { onSuccess: () => client.invalidateQueries(["tests"]) });
+	return useMutation(addTest, {onSuccess: () => client.invalidateQueries(["tests"])});
 }
 
 function addTest({ test }: { test: any }) {
-	return request({ url: "api/data", data: test });
+	return axios.post(`/api/data`, test);
 }

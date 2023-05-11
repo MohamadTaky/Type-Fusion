@@ -11,12 +11,10 @@ config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: "http://192.168.1.106:3000" }));
+app.use(cors({ credentials: true, origin: process.env.CLIENT_URL ?? "http://192.168.1.106:3000" }));
 app.use("/api/data", statsRouter);
 app.use("/api/user", userRouter);
 app.use(errorHandler);
 mongoose
 	.connect(process.env.MONGO_URI)
-	.then(() =>
-		app.listen(process.env.PORT, () => console.log(`sever running on port ${process.env.PORT}`))
-	);
+	.then(() => app.listen(process.env.PORT, () => console.log(`sever running on port ${process.env.PORT}`)));

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
-const client = axios.create({ baseURL: import.meta.env.VITE_API ?? "" });
+const client = axios.create({ baseURL: import.meta.env.VITE_API ?? "",  });
 
 export default function request({ ...options }: AxiosRequestConfig): Promise<AxiosResponse> {
 	const onError = (error: AxiosError) => error;

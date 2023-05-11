@@ -45,6 +45,8 @@ export async function signup(req, res, next) {
 		res
 			.cookie("token", token, {
 				httpOnly: true,
+				sameSite: "none",
+				secure: true,
 				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 3),
 			})
 			.status(200)

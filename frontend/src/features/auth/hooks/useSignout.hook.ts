@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import request from "~/libraries/axios/axiosInterceptor";
 
 export default function useSignout() {
 	const client = useQueryClient();
@@ -7,5 +7,5 @@ export default function useSignout() {
 }
 
 async function signout() {
-	return axios.post("/api/user/signout");
+	return request({ url: "/api/user/signout", method: "post" });
 }

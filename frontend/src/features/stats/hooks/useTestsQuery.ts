@@ -1,7 +1,7 @@
 import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import useUserAuthQuery from "~/features/auth/hooks/useUserAuthQuery.hook";
 import useStatsPersistedStore from "./useStatsPersistedStore";
+import request from "~/libraries/axios/axiosInterceptor";
 
 export default function useTestsQuery() {
 	const { data: userAuth, isLoading } = useUserAuthQuery();
@@ -13,6 +13,6 @@ export default function useTestsQuery() {
 }
 
 async function getTests({ queryKey }: QueryFunctionContext) {
-	if (queryKey[1]) return axios.get(`/api/data`);
+	if (queryKey[1]) return request({ url: "/api/data" });
 	else return Promise.resolve({ data: useStatsPersistedStore.getState() });
 }

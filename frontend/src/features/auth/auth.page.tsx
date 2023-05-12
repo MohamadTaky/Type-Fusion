@@ -58,16 +58,15 @@ export default function AuthPage() {
 						<motion.p
 							key={+toggle}
 							initial={{ opacity: 0 }}
-							animate={{
-								opacity: signsin + signsup > 0 ? 0 : 1,
-								visibility: signsin + signsup > 0 ? "hidden" : "visible",
-							}}
+							animate={{ opacity: signsin + signsup > 0 ? 0 : 1 }}
 							exit={{ opacity: 0 }}
-							transition={{ visibility: { delay: 0.4 } }}
-							className="invisible text-sm first-letter:uppercase">
+							className={`text-sm first-letter:uppercase ${
+								signsin + signsup > 0 ? "pointer-events-none select-none" : ""
+							}`}>
 							{t(toggle ? "already have an account ?" : "don't have an account ?")}
 							<button
 								disabled={signsin + signsup > 0}
+								tabIndex={signsin + signsup ? -1 : 0}
 								onClick={() => setToggle(prev => !prev)}
 								className="mx-1 rounded border border-transparent p-0.5 text-indigo-500 outline-none focus:border-indigo-600 dark:focus:border-indigo-600"
 								type="button">

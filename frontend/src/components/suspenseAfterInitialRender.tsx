@@ -7,12 +7,13 @@ interface IProps {
 
 export default function SuspenseAfterInitialRender({ children, fallback }: IProps) {
 	const [isInitialRender, setIsInitialRender] = useState(true);
-	if (isInitialRender) return <>{children}</>;
-
-	return (
-		<Suspense fallback={fallback}>
+	return isInitialRender ? (
+		<>
+			{children}
 			<LifeCycle setIsInitialRender={setIsInitialRender} />
-		</Suspense>
+		</>
+	) : (
+		<Suspense fallback={fallback}>{children}</Suspense>
 	);
 }
 
@@ -23,6 +24,6 @@ function LifeCycle({
 }) {
 	useEffect(() => {
 		setIsInitialRender(false);
-	}, []);
+	}, [setIsInitialRender]);
 	return <></>;
 }

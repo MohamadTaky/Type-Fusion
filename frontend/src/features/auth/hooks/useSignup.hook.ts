@@ -3,6 +3,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import request from "~/libraries/axios/axiosInterceptor";
 
 interface IProps {
+	username: string;
 	email: string;
 	password: string;
 	confirmedPassword: string;
@@ -16,14 +17,15 @@ export default function useSignup() {
 	);
 }
 
-async function signup({ email, password, confirmedPassword }: IProps) {
+async function signup({ username, email, password, confirmedPassword }: IProps) {
+	if (!username) throw Error("please enter your username");
 	if (!email) throw Error("please enter your email");
 	if (!password) throw Error("please enter your password");
 	if (!confirmedPassword) throw Error("please confirm your password");
 	if (password != confirmedPassword) throw Error("passwords does not match");
 	try {
 		const results = await Promise.allSettled([
-			request({ url: "/api/user/signup", data: { email, password }, method: "post" }),
+			request({ url: "/api/user/signup", data: { username, email, password }, method: "post" }),
 			new Promise(resolve => setTimeout(resolve, 1500)),
 		]);
 		results.forEach(result => {

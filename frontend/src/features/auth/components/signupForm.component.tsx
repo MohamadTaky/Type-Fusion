@@ -13,14 +13,22 @@ function SignupForm({ ...props }: HTMLMotionProps<"form">, ref: Ref<HTMLFormElem
 	const handleSignUp = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const formData = new FormData(event.target as HTMLFormElement);
+		const username = formData.get("signupUsername") as string;
 		const email = formData.get("signupEmail") as string;
 		const password = formData.get("signupPassword") as string;
 		const confirmedPassword = formData.get("signupConfirmPassword") as string;
-		mutate({ email, password, confirmedPassword });
+		mutate({ username, email, password, confirmedPassword });
 	};
 	return (
 		<motion.form onSubmit={handleSignUp} ref={ref} {...props}>
 			<p className="text-xl font-semibold first-letter:uppercase">{t("sign up")}</p>
+			<InputField
+				disabled={isLoading}
+				id="signupUsername"
+				name="signupUsername"
+				label="username"
+				type="text"
+			/>
 			<InputField disabled={isLoading} id="signupEmail" name="signupEmail" label="email" type="email" />
 			<InputField
 				disabled={isLoading}
@@ -40,8 +48,7 @@ function SignupForm({ ...props }: HTMLMotionProps<"form">, ref: Ref<HTMLFormElem
 				<span>{t(isLoading ? "signing up" : "sign up")}</span>
 				{isLoading && <CircleNotch className="mx-1 inline-block animate-spin" weight="bold" size="24" />}
 			</Button>
-
-			<p className="grid h-10 items-center rounded border-2 border-error-1 bg-error-2 p-2 text-sm transition-opacity first-letter:uppercase empty:opacity-0">
+			<p className="grid h-10 items-center rounded border-2 border-error-2 bg-error-1 p-2 text-sm transition-opacity first-letter:uppercase empty:opacity-0">
 				{t(error?.message ?? "")}
 			</p>
 		</motion.form>

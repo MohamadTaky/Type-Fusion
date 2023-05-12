@@ -40,9 +40,9 @@ export async function singin(req, res, next) {
 }
 
 export async function signup(req, res, next) {
-	const { email, password } = req.body;
+	const {username, email, password } = req.body;
 	try {
-		const user = await User.signup(email, password);
+		const user = await User.signup(username, email, password);
 		const token = createToken(user._id);
 		res
 			.cookie("token", token, {

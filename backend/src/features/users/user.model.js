@@ -5,11 +5,18 @@ import Exception from "common/classes/Exception.class.js";
 
 const UserSchema = new Schema(
 	{
+		username: {
+			type: String,
+			required: true,
+			unique: true,
+			trim: true,
+		},
 		email: {
 			type: String,
 			required: true,
 			unique: true,
 			lowercase: true,
+			trim: true,
 		},
 		password: {
 			type: String,
@@ -88,22 +95,32 @@ UserSchema.virtual("averageAccuracy").get(function () {
 UserSchema.virtual("averageScore").get(function () {
 	return Math.round(this.totalScore / this.completedTests) || 0;
 });
-UserSchema.statics.signup = async function (email, password) {
-	if (!email || !password) {
+UserSchema.statics.signup = async function (username, email, password) {
+	console.log(username);
+	if (!username || !email || !password) {
 		throw new Exception("all fields must be filled", 400);
+	}
+	if (username.length < 6) {
+		throw new Exception("username must be at least six characters", 400);
 	}
 	if (!validator.isEmail(email)) {
 		throw new Exception("invalid email", 400);
 	}
+	if (password.length < 8) {
+		throw new Exception("password must be at least eight characters", 400);
+	}
 	if (!validator.isStrongPassword(password, { minLength: 8 })) {
 		throw new Exception("password is not a strong password", 400);
+	}
+	if (await this.exists({ username })) {
+		throw new Exception("username alrady exists", 400);
 	}
 	if (await this.exists({ email })) {
 		throw new Exception("email alrady exists", 400);
 	}
 	const salt = await bcrypt.genSalt();
 	const hashedPassword = await bcrypt.hash(password, salt);
-	return await this.create({ email, password: hashedPassword });
+	return await this.create({ username, email, password: hashedPassword });
 };
 UserSchema.statics.signin = async function (email, password) {
 	if (!email || !password) {

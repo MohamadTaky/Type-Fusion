@@ -2,7 +2,7 @@ import KeyboardKey from "./keyboardKey.component";
 
 export default function Keyboard() {
 	return (
-		<div className="mx-auto w-fit rounded-md border  border-fill-2 bg-fill-3 p-4 font-mono">
+		<div dir="ltr" className="mx-auto w-fit rounded-md border  border-fill-2 bg-fill-3 p-4 font-mono">
 			<div className="flex justify-center gap-2">
 				<KeyboardKey value="`" keyCode="Backquote" />
 				<KeyboardKey value="1" keyCode="Digit1" />

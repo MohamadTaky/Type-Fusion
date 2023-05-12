@@ -1,6 +1,8 @@
 {
 	"practice": "تدريب",
-	"stats": "إحصائيات",
+	"dashboard": "بيانات",
+	"profile": "الحساب",
+	"leaderboard": "لائحة المتصدرين",
 	"guest": "زائر",
 	"speed": "السرعة",
 	"accuracy": "الدقة",
@@ -24,9 +26,11 @@
 	"sign up": " تسجيل الحساب",
 	"signing up": "جار تسجيل الحساب",
 	"sign out": "تسجيل الخروج",
+	"username": "اسم المستخدم",
 	"email": "البريد الإلكتروني",
 	"password": "كلمة المرور",
 	"confirm password": "تأكيد كلمة المرور",
+	"please enter your username": "الرجاء إدخال اسم المستخدم",
 	"please enter your email": "الرجاء إدخال بريدك الالكتروني",
 	"please enter your password": "الرجاء إدخال كلمة المرور",
 	"please confirm your password": "الرجاء تأكيد كلمة المرور",
@@ -37,5 +41,14 @@
 	"incorrect password": "كلمة المرور غير صحيحة",
 	"invalid email": "البريد الإلكتروني غير صالح",
 	"password is not a strong password": "كلمة المرور ليست قوية بما فيه الكفاية",
-	"email alrady exists": "البريد الإلكتروني موجود مسبقاً"
+	"password must be at least eight characters": "يجب أن تتألف كلمة المرور من ثمانية أحرف على الأقل",
+	"username must be at least six characters": "يجب أن يتألف اسم المستخدم من ستة أحرف على الأقل",
+	"email alrady exists": "البريد الإلكتروني موجود مسبقاً",
+	"username alrady exists": "اسم المستخدم موجود مسبقاً",
+	"username available": "اسم المستخدم متاح",
+	"name": "الاسم",
+	"edit": "تعديل",
+	"cancel": "إلغاء",
+	"confirm": "تأكيد",
+	"delete account": "حذف الحساب"
 }

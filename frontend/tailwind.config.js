@@ -17,6 +17,7 @@ export default {
 				"fill-4": "rgb(var(--color-fill-4) / <alpha-value>)",
 				"error-1": "rgb(var(--color-error-1) / <alpha-value>)",
 				"error-2": "rgb(var(--color-error-2) / <alpha-value>)",
+				"success-1": "rgb(var(--color-success-1) / <alpha-value>)",
 				accent: "rgb(var(--color-accent) / <alpha-value>)",
 			},
 			textColor: {

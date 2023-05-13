@@ -1,4 +1,4 @@
-import AnimatedPage from "~/components/animatedPage.component";
+import AnimatedPage from "~/common/components/animatedPage.component";
 import { Lightning, Gauge, Target, ListChecks, Clock } from "@phosphor-icons/react";
 import CalendarHeatmap from "./components/calendarHeatmap.component";
 import LineChart from "./components/lineChart.component";

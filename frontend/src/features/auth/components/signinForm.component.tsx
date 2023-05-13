@@ -1,7 +1,7 @@
 import { FormEvent, forwardRef, Ref, useEffect } from "react";
 import useSingin from "../hooks/useSignin.hook";
-import InputField from "~/components/inputField.component";
-import Button from "~/components/button.component";
+import Button from "~/common/components/button.component";
+import InputField from "~/common/components/inputField.component";
 import { useTranslation } from "react-i18next";
 import { HTMLMotionProps, motion } from "framer-motion";
 import { CircleNotch } from "@phosphor-icons/react";

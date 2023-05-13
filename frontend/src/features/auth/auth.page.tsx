@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AnimatedPage from "~/components/animatedPage.component";
+import AnimatedPage from "~/common/components/animatedPage.component";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import useMeasure from "react-use-measure";

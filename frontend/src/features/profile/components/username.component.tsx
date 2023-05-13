@@ -1,5 +1,5 @@
 import { useState } from "react";
-import InputField from "~/components/inputField.component";
+import InputField from "~/common/components/inputField.component";
 import { CircleNotch, PencilSimple, Check, X } from "@phosphor-icons/react";
 import useUserAuthQuery from "~/features/auth/hooks/useUserAuthQuery.hook";
 import useCheckUsernameQuery from "../hooks/checkUsernameQuery.hook";
@@ -46,7 +46,7 @@ export default function Username() {
 							isFetching ||
 							(data && data.exists)
 						}
-						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize disabled:cursor-not-allowed disabled:opacity-50 ltr:ml-auto rtl:mr-auto">
+						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize text-gray-100 disabled:cursor-not-allowed disabled:opacity-50 ltr:ml-auto rtl:mr-auto">
 						{isLoading ? (
 							<CircleNotch className="animate-spin" weight="bold" size="24" />
 						) : (
@@ -61,7 +61,7 @@ export default function Username() {
 							removeCheckUsername();
 							setEditedUsername("");
 						}}
-						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize">
+						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize text-gray-100">
 						{t("cancel")} <X weight="bold" size="24" />
 					</button>
 				</>
@@ -75,7 +75,7 @@ export default function Username() {
 							setIsEditingUsername(true);
 							setEditedUsername(userAuth.username);
 						}}
-						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize ltr:ml-auto rtl:mr-auto">
+						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize text-gray-100 ltr:ml-auto rtl:mr-auto">
 						{t("edit")}
 						<PencilSimple weight="fill" size="24" />
 					</button>

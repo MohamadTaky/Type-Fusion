@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import AnimatedPage from "~/components/animatedPage.component";
+import AnimatedPage from "~/common/components/animatedPage.component";
 import useUserAuthQuery from "../auth/hooks/useUserAuthQuery.hook";
 import useLeaderboard from "./hooks/useLeaderboardQuery.hook";
 

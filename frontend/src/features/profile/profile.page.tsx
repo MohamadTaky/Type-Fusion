@@ -15,7 +15,7 @@ export default function ProfilePage() {
 
 	return (
 		<AnimatedPage>
-			<div className="m-4 mx-auto flex w-9/12 flex-col gap-4 bg-fill-3 p-4">
+			<div className="m-4 mx-auto flex w-9/12 flex-col gap-4 rounded-md bg-fill-3 p-4">
 				<Username />
 				<div className="flex items-center justify-between gap-4">
 					<p className="first-letter:uppercase">

@@ -17,9 +17,11 @@ import { useTranslation } from "react-i18next";
 import { useAddTest } from "~/features/stats/hooks/useStatsPersistedStore";
 import useAddTestMutation from "~/features/stats/hooks/useAddTestMutation";
 import useUserAuthQuery from "~/features/auth/hooks/useUserAuthQuery.hook";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function Quote() {
 	const { mutate: addTestMutation } = useAddTestMutation();
+	const client = useQueryClient();
 	const { data: userAuth } = useUserAuthQuery();
 	const { data, fetchNextPage } = useQuotesInfiniteQuery();
 	const previousTime = useRef(Date.now());
@@ -89,6 +91,7 @@ export default function Quote() {
 				errorCount,
 				wrongEntries: Array.from(wrontEntries.current),
 			});
+			client.invalidateQueries(["tests"]);
 		}
 
 		previousTime.current = Date.now();
@@ -129,7 +132,7 @@ export default function Quote() {
 				onBlur={() => setIsFocused(false)}
 				onKeyDown={handleKeyDown}
 				onKeyUp={handleKeyUp}
-				className={`flex h-full flex-col justify-between p-4 outline-none -outline-offset-2 outline-2 blur-sm transition focus:outline-accent focus:blur-none`}>
+				className={`flex h-full flex-col justify-between p-4 outline-none outline-2 -outline-offset-2 blur-sm transition focus:outline-accent focus:blur-none`}>
 				<p className="mx-auto max-w-[60ch] whitespace-pre-wrap text-center tracking-wide">
 					{currentQuote
 						.slice(0, currentLetterIndex)

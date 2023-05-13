@@ -10,12 +10,12 @@ export default function Navbar() {
 	const { data: userAuth } = useUserAuthQuery();
 	const { mutate: signout } = useSignout();
 	return (
-		<aside className="row-span-2 border-r border-fill-2 bg-fill-3">
+		<aside className="row-span-2 border-fill-2 bg-fill-3 ltr:border-r rtl:border-l">
 			<section className="relative grid h-64 grid-cols-1">
 				<div style={{ backgroundImage: `url(${coverImage})` }} className="col-start-1 row-start-1 bg-cover" />
 				<div className="col-start-1 row-start-1 max-h-full bg-gradient-to-b from-transparent from-65% to-fill-3 dark:from-50%" />
 				<figure className="col-start-1 row-start-1 place-self-center">
-					<User className="box-content mx-auto rounded-full bg-fill-2 p-6" weight="fill" size="48" />
+					<User className="mx-auto box-content rounded-full bg-fill-2 p-6" weight="fill" size="48" />
 					<figcaption className="text-center text-lg text-gray-100">
 						{userAuth ? userAuth.username : t("guest")}
 					</figcaption>

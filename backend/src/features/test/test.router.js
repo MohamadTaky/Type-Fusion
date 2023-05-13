@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { getUserData, addNewTest } from "./test.controller.js";
-import requireAuth from "./requireAuth.middleware.js";
+import requireAuth from "../../common/middleware/requireAuth.middleware.js";
 
 const router = Router();
 router.use(requireAuth);

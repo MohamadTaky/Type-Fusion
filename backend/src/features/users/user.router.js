@@ -3,6 +3,7 @@ import { Router } from "express";
 import { checkAuth, singin, signup, signout } from "./user.controller.js";
 import User from "./user.model.js";
 import jwt from "jsonwebtoken";
+import requireAuth from "common/middleware/requireAuth.middleware.js";
 
 const userRouter = Router();
 
@@ -12,24 +13,6 @@ userRouter.get("/checkusername", async (req, res, next) => {
 	try {
 		const exists = await User.exists({ username });
 		res.status(200).json({ exists: !!exists });
-	} catch (error) {
-		next(error);
-	}
-});
-userRouter.post("/editusername", async (req, res, next) => {
-	const { username } = req.body;
-	const { token } = req.cookies;
-	try {
-		if (!token) {
-			throw new Exception("authorization token required", 400);
-		}
-		const { _id } = jwt.verify(token, process.env.SECRET);
-		const exists = await User.exists({ username });
-		if (exists) {
-			throw new Exception("username already exists", 400);
-		}
-		const user = await User.findOneAndUpdate({ _id }, { username });
-		res.status(200).json(user);
 	} catch (error) {
 		next(error);
 	}
@@ -49,5 +32,19 @@ userRouter.get("/leaderboard", async (_req, res, next) => {
 userRouter.post("/signin", singin);
 userRouter.post("/signup", signup);
 userRouter.post("/signout", signout);
+userRouter.use(requireAuth);
+userRouter.post("/editusername", async (req, res, next) => {
+	const { username } = req.body;
+	try {
+		const exists = await User.exists({ username });
+		if (exists) {
+			throw new Exception("username already exists", 400);
+		}
+		const user = await User.findOneAndUpdate({ _id: req._id }, { username });
+		res.status(200).json(user);
+	} catch (error) {
+		next(error);
+	}
+});
 
 export default userRouter;

@@ -110,9 +110,9 @@ UserSchema.statics.signup = async function (username, email, password) {
 	if (password.length < 8) {
 		throw new Exception("password must be at least eight characters", 400);
 	}
-	if (!validator.isStrongPassword(password, { minLength: 8 })) {
-		throw new Exception("password is not a strong password", 400);
-	}
+	// if (!validator.isStrongPassword(password, { minLength: 8 })) {
+	// 	throw new Exception("password is not a strong password", 400);
+	// }
 	if (await this.exists({ username })) {
 		throw new Exception("username alrady exists", 400);
 	}

@@ -4,6 +4,7 @@ import useTestsQuery from "~/features/stats/hooks/useTestsQuery";
 
 export default function Stats() {
 	const { data: stats } = useTestsQuery();
+
 	const errorCount = useErrorCount();
 	const { t } = useTranslation();
 

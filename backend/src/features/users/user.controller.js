@@ -20,6 +20,43 @@ export async function checkAuth(req, res, next) {
 	}
 }
 
+export async function checkUsername(req, res, next) {
+	const { username } = req.query;
+	try {
+		const exists = await User.exists({ username });
+		res.status(200).json({ exists: !!exists });
+	} catch (error) {
+		next(error);
+	}
+}
+
+export async function editUsername(req, res, next) {
+	const { username } = req.body;
+	try {
+		const exists = await User.exists({ username });
+		if (exists) {
+			throw new Exception("username already exists", 400);
+		}
+		const user = await User.findOneAndUpdate({ _id: req.id }, { username }, { runValidators: true });
+		res.status(200).json(user);
+	} catch (error) {
+		next(error);
+	}
+}
+
+export async function getLeaderboard(_req, res, next) {
+	try {
+		const topUsers = await User.find(
+			{ latestSpeed: { $gt: 0 } },
+			"latestSpeed latestScore latestAccuracy username",
+			{ limit: 10, sort: { score: -1 } }
+		);
+		res.status(200).json(topUsers);
+	} catch (error) {
+		next(error);
+	}
+}
+
 export async function singin(req, res, next) {
 	const { email, password } = req.body;
 	try {
@@ -40,7 +77,7 @@ export async function singin(req, res, next) {
 }
 
 export async function signup(req, res, next) {
-	const {username, email, password } = req.body;
+	const { username, email, password } = req.body;
 	try {
 		const user = await User.signup(username, email, password);
 		const token = createToken(user._id);
@@ -78,3 +115,5 @@ export async function signout(req, res, next) {
 		next(error);
 	}
 }
+
+export async function deleteAccount(req, res, next) {}

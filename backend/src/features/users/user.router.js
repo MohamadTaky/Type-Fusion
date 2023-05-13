@@ -1,49 +1,43 @@
-import Exception from "common/classes/Exception.class.js";
 import { Router } from "express";
-import { checkAuth, singin, signup, signout } from "./user.controller.js";
-import User from "./user.model.js";
-import jwt from "jsonwebtoken";
+import {
+	checkAuth,
+	singin,
+	signup,
+	signout,
+	editUsername,
+	checkUsername,
+	getLeaderboard,
+	deleteAccount,
+} from "./user.controller.js";
 import requireAuth from "common/middleware/requireAuth.middleware.js";
+import User from "./user.model.js";
+import Test from "features/test/test.model.js";
+import mongoose from "mongoose";
 
 const userRouter = Router();
 
 userRouter.get("/", checkAuth);
-userRouter.get("/checkusername", async (req, res, next) => {
-	const { username } = req.query;
-	try {
-		const exists = await User.exists({ username });
-		res.status(200).json({ exists: !!exists });
-	} catch (error) {
-		next(error);
-	}
-});
-userRouter.get("/leaderboard", async (_req, res, next) => {
-	try {
-		const topUsers = await User.find(
-			{ latestSpeed: { $gt: 0 } },
-			"latestSpeed latestScore latestAccuracy username",
-			{ limit: 10, sort: { score: -1 } }
-		);
-		res.status(200).json(topUsers);
-	} catch (error) {
-		next(error);
-	}
-});
+userRouter.get("/checkusername", checkUsername);
+userRouter.get("/leaderboard", getLeaderboard);
 userRouter.post("/signin", singin);
 userRouter.post("/signup", signup);
 userRouter.post("/signout", signout);
 userRouter.use(requireAuth);
-userRouter.post("/editusername", async (req, res, next) => {
-	const { username } = req.body;
+userRouter.post("/editusername", editUsername);
+userRouter.delete("/editusername", async (req, res, next) => {
+	const session = await mongoose.startSession();
 	try {
-		const exists = await User.exists({ username });
-		if (exists) {
-			throw new Exception("username already exists", 400);
-		}
-		const user = await User.findOneAndUpdate({ _id: req._id }, { username });
-		res.status(200).json(user);
+		await Promise.all([
+			User.deleteOne({ _id: req.id }, { session }),
+			Test.deleteMany({ host: req.id }, { session }),
+		]);
+		await session.commitTransaction();
+		res.status(200).json({ message: "account has been deleted" });
 	} catch (error) {
+		await session.abortTransaction();
 		next(error);
+	} finally {
+		await session.endSession();
 	}
 });
 

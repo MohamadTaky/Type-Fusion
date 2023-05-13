@@ -10,6 +10,8 @@ const UserSchema = new Schema(
 			required: true,
 			unique: true,
 			trim: true,
+			maxLength: 15,
+			minLength: 6,
 		},
 		email: {
 			type: String,
@@ -96,7 +98,6 @@ UserSchema.virtual("averageScore").get(function () {
 	return Math.round(this.totalScore / this.completedTests) || 0;
 });
 UserSchema.statics.signup = async function (username, email, password) {
-	console.log(username);
 	if (!username || !email || !password) {
 		throw new Exception("all fields must be filled", 400);
 	}

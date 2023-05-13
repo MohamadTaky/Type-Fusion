@@ -48,7 +48,7 @@ export default function Username() {
 						}
 						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize disabled:cursor-not-allowed disabled:opacity-50 ltr:ml-auto rtl:mr-auto">
 						{isLoading ? (
-							<CircleNotch weight="bold" size="24" />
+							<CircleNotch className="animate-spin" weight="bold" size="24" />
 						) : (
 							<>
 								{t("confirm")} <Check weight="bold" size="24" />
@@ -71,7 +71,10 @@ export default function Username() {
 						{t("username")} : {userAuth?.username}
 					</p>
 					<button
-						onClick={() => {setIsEditingUsername(true); setEditedUsername(userAuth.username)}}
+						onClick={() => {
+							setIsEditingUsername(true);
+							setEditedUsername(userAuth.username);
+						}}
 						className="flex items-center gap-2 rounded-md bg-accent p-2 capitalize ltr:ml-auto rtl:mr-auto">
 						{t("edit")}
 						<PencilSimple weight="fill" size="24" />

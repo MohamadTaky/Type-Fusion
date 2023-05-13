@@ -1,4 +1,4 @@
-import AnimatedPage from "~/components/animatedPage.component";
+import AnimatedPage from "~/common/components/animatedPage.component";
 import { useTranslation } from "react-i18next";
 import useUserAuthQuery from "../auth/hooks/useUserAuthQuery.hook";
 import { useEffect, useState } from "react";

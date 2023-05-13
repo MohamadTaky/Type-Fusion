@@ -54,37 +54,39 @@ export async function addNewTest(req, res, next) {
 	const session = await mongoose.startSession();
 	try {
 		session.startTransaction();
-		await User.findOneAndUpdate(
-			{ _id: req.id },
-			{
-				$inc: {
-					totalSpeed: speed,
-					totalAccuracy: accuracy,
-					totalScore: score,
-					practiceDuration: practiceDuration,
-					completedTests: 1,
+		const [_userDoc, testDoc] = await Promise.all([
+			User.findOneAndUpdate(
+				{ _id: req.id },
+				{
+					$inc: {
+						totalSpeed: speed,
+						totalAccuracy: accuracy,
+						totalScore: score,
+						practiceDuration: practiceDuration,
+						completedTests: 1,
+					},
+					$max: {
+						bestScore: score,
+						bestSpeed: speed,
+					},
+					latestAccuracy: accuracy,
+					latestSpeed: speed,
+					latestScore: score,
 				},
-				$max: {
-					bestScore: score,
-					bestSpeed: speed,
+				{ runValidators: true, session }
+			),
+			Test.findOneAndUpdate(
+				{ host: req.id, count: { $lt: 100 } },
+				{
+					host: req.id,
+					$inc: { count: 1 },
+					$push: { values: req.body },
 				},
-				latestAccuracy: accuracy,
-				latestSpeed: speed,
-				latestScore: score,
-			},
-			{ runValidators: true, session }
-		);
-		const TestDoc = await Test.findOneAndUpdate(
-			{ host: req.id, count: { $lt: 100 } },
-			{
-				host: req.id,
-				$inc: { count: 1 },
-				$push: { values: req.body },
-			},
-			{ upsert: true, runValidators: true, new: true, session }
-		);
+				{ upsert: true, runValidators: true, new: true, session }
+			),
+		]);
 		await session.commitTransaction();
-		res.status(200).json(TestDoc);
+		res.status(200).json(testDoc);
 	} catch (error) {
 		await session.abortTransaction();
 		next(error);

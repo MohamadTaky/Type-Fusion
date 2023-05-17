@@ -5,6 +5,7 @@ export default function useLeaderboard() {
 	return useQuery(["leaderboard"], getLeaderboard, {
 		select: data => data.data,
 		suspense: true,
+		refetchInterval: 5000,
 	});
 }
 

@@ -19,11 +19,10 @@ export default {
 				"error-2": "rgb(var(--color-error-2) / <alpha-value>)",
 				"success-1": "rgb(var(--color-success-1) / <alpha-value>)",
 				accent: "rgb(var(--color-accent) / <alpha-value>)",
-			},
-			textColor: {
 				primary: "rgb(var(--color-primary) / <alpha-value>)",
 				secondary: "rgb(var(--color-secondary) / <alpha-value>)",
 			},
+			textColor: {},
 			fontFamily: {
 				mono: ["Cousine", "Courier New"],
 			},

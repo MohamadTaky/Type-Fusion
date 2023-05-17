@@ -7,7 +7,6 @@ export default function LeaderboardPage() {
 	const { t } = useTranslation();
 	const { data } = useLeaderboard();
 	const { data: userAuth } = useUserAuthQuery();
-	console.log(userAuth);
 	return (
 		<AnimatedPage className="p-4">
 			<div className="custom-scroll relative mx-auto h-96 w-11/12 overflow-y-auto rounded-md bg-fill-3">

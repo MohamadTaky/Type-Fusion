@@ -14,6 +14,7 @@ import QueryErrorBoundary from "./common/fallbacks/queryErrorBoundary.component"
 import { useDarkMode } from "./features/navigation/usePreferencesPersistedStore";
 import { useTranslation } from "react-i18next";
 import ProfilePage from "./features/profile/profile.page";
+import AboutPage from "./features/about/about.page";
 
 function App() {
 	const darkMode = useDarkMode();
@@ -37,6 +38,7 @@ function App() {
 									<Route path="*" element={<ErrorPage />} />
 									<Route path="/auth" element={<AuthPage />} />
 									<Route path="/leaderboard" element={<LeaderboardPage />} />
+									<Route path="/about" element={<AboutPage />} />
 								</Routes>
 							</AnimatePresence>
 						</SuspenseAfterInitialRender>

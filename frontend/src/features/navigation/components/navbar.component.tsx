@@ -1,4 +1,4 @@
-import { User, ChartBar, Keyboard, SignIn, SignOut, Crown, UserCircle } from "@phosphor-icons/react";
+import { User, ChartBar, Keyboard, SignIn, SignOut, Crown, UserCircle, Info } from "@phosphor-icons/react";
 import coverImage from "/assets/cover-image.webp";
 import NavItem from "./navItem.component";
 import { useTranslation } from "react-i18next";
@@ -41,6 +41,7 @@ export default function Navbar() {
 					) : (
 						<NavItem to="/auth" label="sign in" Icon={SignIn} />
 					)}
+					<NavItem to="/about" label="about" Icon={Info} />
 				</div>
 			</nav>
 		</aside>

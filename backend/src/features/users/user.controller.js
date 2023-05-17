@@ -49,8 +49,9 @@ export async function getLeaderboard(_req, res, next) {
 		const topUsers = await User.find(
 			{ latestSpeed: { $gt: 0 } },
 			"latestSpeed latestScore latestAccuracy username",
-			{ limit: 10, sort: { score: -1 } }
+			{ limit: 10, sort: { latestScore: -1 } }
 		);
+		console.log(topUsers);
 		res.status(200).json(topUsers);
 	} catch (error) {
 		next(error);

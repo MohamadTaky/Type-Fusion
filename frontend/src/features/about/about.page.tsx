@@ -23,7 +23,7 @@ export default function AboutPage() {
 					</li>
 					<li>
 						<a href="https://expressjs.com/" className="group" target="_blank">
-							<ExpressLogo className="h-16 w-16 fill-secondary hover:fill-black group-hover:transition-colors" />
+							<ExpressLogo className="h-16 w-16 fill-secondary group-hover:fill-black group-hover:transition-colors" />
 							<p className="text-secondary group-hover:text-black group-hover:transition-colors">
 								Express.js
 							</p>
@@ -31,13 +31,13 @@ export default function AboutPage() {
 					</li>
 					<li>
 						<a href="https://reactjs.org/" className="group" target="_blank" >
-							<ReactLogo className="h-16 w-16 fill-secondary hover:fill-[#61DBFB] group-hover:transition-colors" />
+							<ReactLogo className="h-16 w-16 fill-secondary group-hover:fill-[#61DBFB] group-hover:transition-colors" />
 							<p className="text-secondary group-hover:text-[#61DBFB] group-hover:transition-colors">React</p>
 						</a>
 					</li>
 					<li>
 						<a href="https://nodejs.org/" className="group" target="_blank">
-							<NodejsLogo className="h-16 w-16 fill-secondary hover:fill-[#699F63] group-hover:transition-colors" />
+							<NodejsLogo className="h-16 w-16 fill-secondary group-hover:fill-[#699F63] group-hover:transition-colors" />
 							<p className="text-secondary group-hover:text-[#699F63] group-hover:transition-colors">
 								Node.js
 							</p>

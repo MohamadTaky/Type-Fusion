@@ -5,15 +5,15 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "~/components/navigation/Navbar";
 import Topbar from "~/components/navigation/Topbar";
 import NotFound from "~/components/shared/NotFound";
-import QueryErrorBoundary from "./components/shared/QueryErrorBoundary";
-import SuspenseFallback from "./components/shared/SuspenseFallback";
+import QueryErrorBoundary from "~/components/shared/QueryErrorBoundary";
+import SuspenseFallback from "~/components/shared/SuspenseFallback";
 import AboutPage from "~/pages/AboutPage";
-import AuthPage from "./pages/AuthPage";
-import LeaderboardPage from "./pages/LeaderboardPage";
-import { useDarkMode } from "./store/usePreferencesPersistedStore";
-import PracticePage from "./pages/PracticePage";
-import ProfilePage from "./pages/ProfilePage";
-import StatsPage from "./pages/StatsPage";
+import AuthPage from "~/pages/AuthPage";
+import LeaderboardPage from "~/pages/LeaderboardPage";
+import PracticePage from "~/pages/PracticePage";
+import ProfilePage from "~/pages/ProfilePage";
+import StatsPage from "~/pages/StatsPage";
+import { useDarkMode } from "~/store/usePreferencesPersistedStore";
 
 function App() {
 	const darkMode = useDarkMode();

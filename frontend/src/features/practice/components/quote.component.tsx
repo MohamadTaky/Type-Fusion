@@ -14,9 +14,9 @@ import usePracticeStore, {
 } from "../usePractice.store";
 import { useTranslation } from "react-i18next";
 
-import { useAddTest } from "~/features/stats/hooks/useStatsPersistedStore";
-import useAddTestMutation from "~/features/stats/hooks/useAddTestMutation";
-import useUserAuthQuery from "~/features/auth/hooks/useUserAuthQuery.hook";
+import { useAddTest } from "src/features/stats/hooks/useStatsPersistedStore";
+import useAddTestMutation from "src/features/stats/hooks/useAddTestMutation";
+import useUserAuthQuery from "src/features/auth/hooks/useUserAuthQuery.hook";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function Quote() {

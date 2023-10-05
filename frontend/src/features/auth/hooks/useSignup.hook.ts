@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AxiosError, AxiosResponse } from "axios";
-import request from "~/libraries/axios/axiosInterceptor";
+import request from "src/libraries/axios/axiosInterceptor";
 
 interface IProps {
 	username: string;

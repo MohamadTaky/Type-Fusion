@@ -1,7 +1,7 @@
 import { useState } from "react";
-import InputField from "~/common/components/inputField.component";
+import InputField from "src/common/components/inputField.component";
 import { CircleNotch, PencilSimple, Check, X } from "@phosphor-icons/react";
-import useUserAuthQuery from "~/features/auth/hooks/useUserAuthQuery.hook";
+import useUserAuthQuery from "src/features/auth/hooks/useUserAuthQuery.hook";
 import useCheckUsernameQuery from "../hooks/checkUsernameQuery.hook";
 import { useTranslation } from "react-i18next";
 import useEditUsernameMutation from "../hooks/useEditUsernameMutation.hook";

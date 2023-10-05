@@ -1,4 +1,4 @@
-import AnimatedPage from "~/common/components/animatedPage.component";
+import AnimatedPage from "src/common/components/animatedPage.component";
 import { ReactComponent as MongodbLogo } from "./assets/mongodb-logo.svg";
 import { ReactComponent as ExpressLogo } from "./assets/express-logo.svg";
 import { ReactComponent as ReactLogo } from "./assets/react-logo.svg";
@@ -30,7 +30,7 @@ export default function AboutPage() {
 						</a>
 					</li>
 					<li>
-						<a href="https://reactjs.org/" className="group" target="_blank" >
+						<a href="https://reactjs.org/" className="group" target="_blank">
 							<ReactLogo className="h-16 w-16 fill-secondary group-hover:fill-[#61DBFB] group-hover:transition-colors" />
 							<p className="text-secondary group-hover:text-[#61DBFB] group-hover:transition-colors">React</p>
 						</a>

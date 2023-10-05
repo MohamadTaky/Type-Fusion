@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const client = axios.create({ baseURL: import.meta.env.VITE_API ?? "", withCredentials: true });
 

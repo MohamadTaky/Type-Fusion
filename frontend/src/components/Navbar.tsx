@@ -1,9 +1,9 @@
 import { User, ChartBar, Keyboard, SignIn, SignOut, Crown, UserCircle, Info } from "@phosphor-icons/react";
 import coverImage from "/assets/cover-image.webp";
-import NavItem from "./navItem.component";
+import NavItem from "../features/navigation/components/navItem.component";
 import { useTranslation } from "react-i18next";
-import useUserAuthQuery from "~/features/auth/hooks/useUserAuthQuery.hook";
-import useSignout from "~/features/auth/hooks/useSignout.hook";
+import useUserAuthQuery from "src/features/auth/hooks/useUserAuthQuery.hook";
+import useSignout from "src/features/auth/hooks/useSignout.hook";
 
 export default function Navbar() {
 	const { t } = useTranslation();

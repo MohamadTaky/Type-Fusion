@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AnimatedPage from "~/common/components/animatedPage.component";
+import AnimatedPage from "src/common/components/animatedPage.component";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import useMeasure from "react-use-measure";
@@ -31,9 +31,7 @@ export default function AuthPage() {
 			<div className="overflow-hidden rounded-md border border-gray-300 bg-gray-200 p-4 dark:border-hatai-600 dark:bg-hatai-800">
 				<h2 className="text-center text-2xl font-bold">Type Fusion</h2>
 				<MotionConfig transition={{ duration: 0.4 }}>
-					<motion.div
-						animate={{ height: formHeight }}
-						className="my-2">
+					<motion.div animate={{ height: formHeight }} className="my-2">
 						<AnimatePresence mode="wait">
 							{toggle ? (
 								<SignupForm

@@ -1,4 +1,4 @@
-import request from "~/libraries/axios/axiosInterceptor";
+import request from "src/libraries/axios/axiosInterceptor";
 import { useQuery } from "@tanstack/react-query";
 
 export default function useCheckUsernameQuery(username: string) {

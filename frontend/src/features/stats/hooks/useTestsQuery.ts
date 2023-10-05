@@ -1,7 +1,7 @@
 import { QueryFunctionContext, useQuery } from "@tanstack/react-query";
-import useUserAuthQuery from "~/features/auth/hooks/useUserAuthQuery.hook";
+import useUserAuthQuery from "src/features/auth/hooks/useUserAuthQuery.hook";
 import useStatsPersistedStore from "./useStatsPersistedStore";
-import request from "~/libraries/axios/axiosInterceptor";
+import request from "src/libraries/axios/axiosInterceptor";
 
 export default function useTestsQuery() {
 	const { data: userAuth, isLoading } = useUserAuthQuery();

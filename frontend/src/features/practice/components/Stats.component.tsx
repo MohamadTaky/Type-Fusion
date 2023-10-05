@@ -1,6 +1,6 @@
 import { useErrorCount } from "../usePractice.store";
 import { useTranslation } from "react-i18next";
-import useTestsQuery from "~/features/stats/hooks/useTestsQuery";
+import useTestsQuery from "src/features/stats/hooks/useTestsQuery";
 
 export default function Stats() {
 	const { data: stats } = useTestsQuery();

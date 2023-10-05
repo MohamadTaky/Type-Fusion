@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import request from "~/libraries/axios/axiosInterceptor";
+import request from "src/libraries/axios/axiosInterceptor";
 
 export default function useUserAuthQuery() {
 	return useQuery(["user"], getUserAuth, {

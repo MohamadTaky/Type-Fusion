@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import request from "~/libraries/axios/axiosInterceptor";
+import request from "src/libraries/axios/axiosInterceptor";
 
 export default function useAddTestMutation() {
 	const client = useQueryClient();

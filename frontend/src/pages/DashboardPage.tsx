@@ -3,17 +3,19 @@ import { addDays, format, getDaysInYear, startOfYear } from "date-fns";
 import { useTranslation } from "react-i18next";
 import useMeasure from "react-use-measure";
 import AnimatedPage from "@/components/shared/AnimatedPage";
-import CalendarHeatmap from "@/components/stats/CalendarHeatMap";
-import LineChart from "@/components/stats/LineChart";
-import TestHistoryList from "@/components/stats/TestHistoryList";
+import CalendarHeatmap from "@/components/dashboard/CalendarHeatMap";
+import LineChart from "@/components/dashboard/LineChart";
+import TestHistoryList from "@/components/dashboard/TestHistoryList";
 import useTestsQuery from "@/hooks/stats/useTestsQuery";
+import useStatsPersistedStore from "@/hooks/stats/useStatsPersistedStore";
 
-export default function StatsPage() {
+export default function DashboardPage() {
   const [heatMapContainerRef, { width: heatMapWidth, height: heatmapHeight }] = useMeasure();
   const [lineChartContainerRef, { width: lineChartWidth, height: lineChartHeight }] = useMeasure();
   const { t } = useTranslation();
-
-  const { data: stats } = useTestsQuery();
+  const { data: tests } = useTestsQuery();
+  const store = useStatsPersistedStore();
+  const stats = tests ?? store;
 
   const data = Array(getDaysInYear(new Date()))
     .fill(0)

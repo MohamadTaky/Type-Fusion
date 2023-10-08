@@ -10,7 +10,7 @@ import AuthPage from "@/pages/AuthPage";
 import LeaderboardPage from "@/pages/LeaderboardPage";
 import PracticePage from "@/pages/PracticePage";
 import ProfilePage from "@/pages/ProfilePage";
-import StatsPage from "@/pages/StatsPage";
+import DashboardPage from "@/pages/DashboardPage";
 import usePreferencesPersistedStore from "@/store/usePreferencesPersistedStore";
 import cn from "@/utils/cn";
 import { AnimatePresence, motion } from "framer-motion";
@@ -49,7 +49,7 @@ function App() {
               <SuspenseAfterInitialRender isInitialRender={isInitialRender}>
                 <Routes location={location}>
                   <Route path="/" index element={<PracticePage />} />
-                  <Route path="/dashboard" element={<StatsPage />} />
+                  <Route path="/dashboard" element={<DashboardPage />} />
                   <Route path="/profile" element={<ProfilePage />} />
                   <Route path="*" element={<NotFound />} />
                   <Route path="/auth" element={<AuthPage />} />

@@ -16,9 +16,4 @@ const usePreferencesPersistedStore = create<IPreferencesPersistedStore>()(
 	)
 );
 
-export function useDarkMode() {
-	return usePreferencesPersistedStore(state => state.darkMode);
-}
-export function useToggleDarkMode() {
-	return usePreferencesPersistedStore(state => state.toggleDarkMode);
-}
+export default usePreferencesPersistedStore;

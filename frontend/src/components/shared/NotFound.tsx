@@ -1,4 +1,5 @@
 import AnimatedPage from "./AnimatedPage";
+import {} from "@phosphor-icons/react";
 
 export default function NotFound() {
 	return (

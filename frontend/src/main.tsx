@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import "~/libraries/i18next/i18next";
+import "@/libraries/i18next/i18next";
 import App from "./App";
 import "./index.css";
 import QueryClientProvider from "./libraries/react-query/queryClientProvider";

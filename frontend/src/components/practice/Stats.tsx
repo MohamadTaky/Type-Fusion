@@ -1,41 +1,42 @@
 import { useTranslation } from "react-i18next";
-import useTestsQuery from "~/hooks/stats/useTestsQuery";
-import { useErrorCount } from "~/store/usePracticeStore";
 
-export default function Stats() {
-	const { data: stats } = useTestsQuery();
+type StatsProps = {
+  latestSpeed: number;
+  latestAccuracy: number;
+  latestScore: number;
+  errorCount: number;
+};
 
-	const errorCount = useErrorCount();
-	const { t } = useTranslation();
-
-	return (
-		<div className="mt-auto flex justify-around rounded-md border border-fill-2 bg-fill-3 p-2 text-sm capitalize">
-			<div>
-				{t("errors")} : <span className="text-error-2">{errorCount}</span>
-			</div>
-			<div>
-				{t("speed")} :{" "}
-				{stats.latestSpeed ? (
-					<span>
-						{stats.latestSpeed} <span className="text-xs lowercase">{t("wpm")}</span>
-					</span>
-				) : (
-					"N/A"
-				)}
-			</div>
-			<div>
-				{t("accuracy")} :{" "}
-				{stats.latestAccuracy ? (
-					<span dir="ltr">
-						{stats.latestAccuracy} <span className="text-xs">%</span>
-					</span>
-				) : (
-					"N/A"
-				)}
-			</div>
-			<div>
-				{t("score")} : {stats.latestScore || "N/A"}
-			</div>
-		</div>
-	);
+export default function Stats({ latestSpeed, latestAccuracy, latestScore, errorCount }: StatsProps) {
+  const { t } = useTranslation();
+  return (
+    <div className="mt-auto flex justify-around rounded-md border border-fill-2 bg-fill-3 p-2 text-sm capitalize">
+      <div>
+        {t("errors")} : <span className="text-error-2">{errorCount}</span>
+      </div>
+      <div>
+        {t("speed")} :{" "}
+        {latestSpeed ? (
+          <span>
+            {latestSpeed} <span className="text-xs lowercase">{t("wpm")}</span>
+          </span>
+        ) : (
+          "N/A"
+        )}
+      </div>
+      <div>
+        {t("accuracy")} :{" "}
+        {latestAccuracy ? (
+          <span dir="ltr">
+            {latestAccuracy} <span className="text-xs">%</span>
+          </span>
+        ) : (
+          "N/A"
+        )}
+      </div>
+      <div>
+        {t("score")} : {latestScore || "N/A"}
+      </div>
+    </div>
+  );
 }

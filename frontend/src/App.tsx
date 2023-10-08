@@ -1,11 +1,9 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { Suspense, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "@/components/navigation/Navbar";
 import Topbar from "@/components/navigation/Topbar";
+import LifeCycle from "@/components/shared/LifeCycle";
 import NotFound from "@/components/shared/NotFound";
 import QueryErrorBoundary from "@/components/shared/QueryErrorBoundary";
+import SuspenseAfterInitialRender from "@/components/shared/SuspenseAfterInitialRender";
 import SuspenseFallback from "@/components/shared/SuspenseFallback";
 import AboutPage from "@/pages/AboutPage";
 import AuthPage from "@/pages/AuthPage";
@@ -14,9 +12,11 @@ import PracticePage from "@/pages/PracticePage";
 import ProfilePage from "@/pages/ProfilePage";
 import StatsPage from "@/pages/StatsPage";
 import usePreferencesPersistedStore from "@/store/usePreferencesPersistedStore";
-import LifeCycle from "./components/shared/LifeCycle";
-import SuspenseAfterInitialRender from "./components/shared/SuspenseAfterInitialRender";
-import cn from "./utils/cn";
+import cn from "@/utils/cn";
+import { AnimatePresence, motion } from "framer-motion";
+import { Suspense, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Route, Routes, useLocation } from "react-router-dom";
 
 function App() {
   const darkMode = usePreferencesPersistedStore((store) => store.darkMode);

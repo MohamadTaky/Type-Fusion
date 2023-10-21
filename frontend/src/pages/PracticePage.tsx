@@ -8,7 +8,7 @@ import useUserAuthQuery from "@/hooks/auth/useUserAuthQuery.hook";
 export default function PracticePage() {
   const { data: userAuth } = useUserAuthQuery();
   return (
-    <AnimatedPage className="mx-auto w-fit space-y-4">
+    <AnimatedPage className="mx-auto w-fit space-y-2">
       <Quote />
       {userAuth ? <OnlineStats /> : <OfflineStats />}
       <Keyboard />

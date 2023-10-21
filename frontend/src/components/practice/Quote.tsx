@@ -31,7 +31,7 @@ export default function Quote() {
   const incrementCurrentLetterIndex = useIncrementCurrentLetterIndex();
   const resetCurrentLetterIndex = useResetCurrentLetterIndex();
   const currentQuoteIndex = useCurrentQuoteIndex();
-  const currentQuote = data?.pages[currentQuoteIndex].content as string;
+  const currentQuote = data?.pages[currentQuoteIndex].content ?? "";
   const incrementCurrentQuoteIndex = useIncrementCurrentQuoteIndex();
   const incrementErrorCount = useIncrementErrorCount();
   const errorCount = useErrorCount();
@@ -108,9 +108,7 @@ export default function Quote() {
     setCorrectPress(currentQuote.at(currentLetterIndex) === event.key);
   };
 
-  const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = (event) => {
-    releaseKey(event.code);
-  };
+  const handleKeyUp: KeyboardEventHandler<HTMLInputElement> = (event) => releaseKey(event.code);
 
   return (
     <section

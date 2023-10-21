@@ -7,15 +7,12 @@ import CalendarHeatmap from "@/components/dashboard/CalendarHeatMap";
 import LineChart from "@/components/dashboard/LineChart";
 import TestHistoryList from "@/components/dashboard/TestHistoryList";
 import useTestsQuery from "@/hooks/stats/useTestsQuery";
-import useStatsPersistedStore from "@/hooks/stats/useStatsPersistedStore";
 
 export default function DashboardPage() {
   const [heatMapContainerRef, { width: heatMapWidth, height: heatmapHeight }] = useMeasure();
   const [lineChartContainerRef, { width: lineChartWidth, height: lineChartHeight }] = useMeasure();
   const { t } = useTranslation();
-  const { data: tests } = useTestsQuery();
-  const store = useStatsPersistedStore();
-  const stats = tests ?? store;
+  const stats = useTestsQuery();
 
   const data = Array(getDaysInYear(new Date()))
     .fill(0)
@@ -23,6 +20,7 @@ export default function DashboardPage() {
       value: stats.tests[format(addDays(startOfYear(new Date()), i), "yyyyMMdd")]?.speed.length ?? 0,
       date: addDays(startOfYear(new Date()), i),
     }));
+
 
   return (
     <AnimatedPage className="grid grid-cols-5 grid-rows-[auto_275px_auto] gap-2 lg:grid-rows-[auto_236px_auto]">

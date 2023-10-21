@@ -19,7 +19,7 @@ export default function LineChart({ width, height, ySpacing = 5, xSpacing = 10 }
   const [weekLabelRef, { height: weekLabelHeight, width: weekLabelWidth }] = useMeasure();
   const [tickRef, { width: tickWidth, height: tickHeight }] = useMeasure();
 
-  const { data: stats } = useTestsQuery();
+  const stats = useTestsQuery();
   const week = Array(7)
     .fill(0)
     .map((_, i) => ({

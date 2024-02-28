@@ -12,8 +12,6 @@ export default function useTestsQuery() {
     suspense: true,
   });
 
-  console.log(query.data ?? store);
-
   return query.data ?? store;
 }
 

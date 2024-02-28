@@ -5,7 +5,6 @@ import { useEffect } from "react";
 
 export default function OnlineStats() {
   const { data, refetch } = useTestsQuery();
-  const { latestSpeed, latestScore, latestAccuracy } = data;
   const errorCount = usePracticeStore((store) => store.errorCount);
   const currentQuoteIndex = usePracticeStore((store) => store.currentQuoteIndex);
   useEffect(() => {
@@ -13,9 +12,9 @@ export default function OnlineStats() {
   }, [currentQuoteIndex]);
   return (
     <Stats
-      latestSpeed={latestSpeed}
-      latestScore={latestScore}
-      latestAccuracy={latestAccuracy}
+      latestSpeed={data?.latestSpeed}
+      latestScore={data?.latestScore}
+      latestAccuracy={data?.latestAccuracy}
       errorCount={errorCount}
     />
   );

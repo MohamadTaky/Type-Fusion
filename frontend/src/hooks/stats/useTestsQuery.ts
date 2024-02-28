@@ -5,14 +5,13 @@ import useStatsPersistedStore from "./useStatsPersistedStore";
 
 export default function useTestsQuery() {
   const { data: userAuth } = useUserAuthQuery();
-  const store = useStatsPersistedStore();
   const query = useQuery(["tests"], getTests, {
     select: (data) => data.data,
     enabled: !!userAuth,
     suspense: true,
   });
 
-  return query.data ?? store;
+  return query;
 }
 
 async function getTests() {
